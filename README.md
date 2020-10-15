@@ -43,8 +43,8 @@ SDK支持 iOS 9.0 以上设备，请保持Xcode开发工具升级到最新版本
 
 ### 1、资源下载
 
->- [x] 肤质分析 SDK 下载  [SLSkinAnalysisQCloud.framework](https://e.coding.net/clife-devops/jifumijueAPP/ios-skinanalysis-sdk.git)
->- [x] Demo下载 [SLSkinAnalysisDemo](https://e.coding.net/clife-devops/jifumijueAPP/ios-skinanalysis-sdk.git)
+>- [x] 肤质分析 SDK 下载  [SLSkinAnalysisQCloud.framework](https://github.com/iCodingBoyy/SLSkinAnalysis.git)
+>- [x] Demo下载 [SLSkinAnalysisDemo](https://github.com/iCodingBoyy/SLSkinAnalysis.git)
 
 
 ### 2、Xcode 集成
