@@ -1,0 +1,6 @@
+framework module SLSkinAnalysisQCloud {
+  umbrella header "SLSkinAnalysisQCloud.h"
+
+  export *
+  module * { export * }
+}
