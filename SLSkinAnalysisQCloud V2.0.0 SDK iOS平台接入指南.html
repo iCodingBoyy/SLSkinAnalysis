@@ -32,7 +32,7 @@
             <td>2020年09月29日</td>
             <td>2.0.0</td>
             <td>马远征</td>
-            <td>改进拍照测肤SDK架构，并集成了人脸遮挡物检测功能</td>
+            <td>1、新增测肤输出参数，包括Location和缺水缺油、敏感、面积占比。\n 2、新增遮挡物检测功能，优化SDK架构，改进性能</td>
         </tr>
     </tbody>
 </table>
@@ -58,7 +58,7 @@
 <h3 id="1资源下载">1、资源下载</h3>
 
 <blockquote>
-  <div class="checklist"><div class="checklist-item"><input type="checkbox" checked="checked"> 肤质分析 SDK 下载  <a href="https://github.com/iCodingBoyy/SLSkinAnalysis.git" target="_blank">SLSkinAnalysisQCloud.framework</a></div><div class="checklist-item"><input type="checkbox" checked="checked"> Demo下载 <a href="https://github.com/iCodingBoyy/SLSkinAnalysis.git" target="_blank">SLSkinAnalysisDemo</a></div></div>
+  <div class="checklist"><div class="checklist-item"><input type="checkbox" checked="checked"> 肤质分析 SDK 下载  <a href="https://github.com/iCodingBoyy/SLSkinAnalysis.git" target="_blank">SLSkinAnalysisQCloud.framework</a></div><div class="checklist-item"><input type="checkbox" checked="checked"> Demo下载 <a href="https://github.com/iCodingBoyy/SLSkinAnalysis.git" target="_blank">SLSkinAnalysisDemo</a></div><div class="checklist-item"><input type="checkbox" checked="checked"> 腾讯云存储下载 <a href="https://github.com/tencentyun/qcloud-sdk-ios/releases" target="_blank">QCloud</a></div></div>
 </blockquote>
 
 
@@ -67,16 +67,18 @@
 
 <p>1、将<code>SLSkinAnalysisQCloud.framework</code> 拖到你的项目中，将 <code>Embed</code> 设置为 <code>Embed &amp; Sign</code></p>
 
-<p>2、添加必要的链接库文件，并在 <code>Other Link Flags</code> 选项添加 <code>-ObjC</code></p>
+<p>2、前往 <a href="https://opencv.org/releases/" target="_blank"> OpenCV </a>下载 <code>opencv2.framework</code>，选择3.4.x版本即可。</p>
+
+<p>3、前往腾讯云下载 <a href="https://github.com/tencentyun/qcloud-sdk-ios/releases" target="_blank">QCloud</a> 拖入到工程，你也可以通过<code>Cocoapods</code>集成腾讯云<code>QCloud</code>，具体见教程 <a href="https://cloud.tencent.com/document/product/436/11280" target="_blank">iOS SDK文档</a></p>
+
+<p>4、添加必要的链接库文件，并在 <code>Other Link Flags</code> 选项添加 <code>-ObjC</code></p>
 
 <ul><li><p>libc++.tdb</p></li>
 </ul>
 
-<p>3、在需要使用的地方导入头文件 <code>#import &lt;SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h&gt;</code> 即可进入相关开发</p>
+<p>5、在需要使用的地方导入头文件 <code>#import &lt;SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h&gt;</code> 即可进入相关开发</p>
 
 <hr>
-
-
 
 <h2 id="三接入指南">三、接入指南</h2>
 
