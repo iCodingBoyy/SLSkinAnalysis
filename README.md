@@ -29,7 +29,7 @@
             <td>1、增加了鱼尾纹维度；2、增加了算法超时错误码</td>
         </tr>
         <tr>
-            <td>2020年06月15日</td>
+            <td>2020年07月16日</td>
             <td>1.0.7</td>
             <td>李孝宇</td>
             <td>1、增加了遮挡物字段（faceShelter）；2、增加了测肤记录ID(photographId)</td>
@@ -38,7 +38,7 @@
             <td>2020年07月23日</td>
             <td>1.0.8</td>
             <td>李孝宇</td>
-            <td>1、增加了眉间纹；2、细纹 Wrinkles 下增加面积字段</td>
+            <td>1、测肤记录ID字段photographId改为String类型</td>
         </tr>
         <tr>
             <td>2020年08月20日</td>
@@ -56,7 +56,7 @@
             <td>2020年10月16日</td>
             <td>2.0.0</td>
             <td>马远征</td>
-            <td>1.新增油分整脸情况字段oilOverall；2.新增水分整脸情况字段moistureOverall；3.新增敏感整脸情况字段sensitivityOverall；4.新增对应原图的人脸区域坐标字段orgImageFaceLocation。5、新增遮挡物检测功能 </td>
+            <td>1.新增油分整脸情况字段oilOverall；2.新增水分整脸情况字段moistureOverall；3.新增敏感整脸情况字段sensitivityOverall；4.新增对应原图的人脸区域坐标字段orgImageFaceLocation。 </td>
         </tr>
     </tbody>
 </table>
@@ -1655,6 +1655,7 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
         <td>本地解析网络数据失败</td>
     </tr>
 </table>
+
 
 
 
