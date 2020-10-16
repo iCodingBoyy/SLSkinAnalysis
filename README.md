@@ -23,10 +23,40 @@
     </thead>
     <tbody> 
         <tr>
+            <td>2020年06月15日</td>
+            <td>1.0.6</td>
+            <td>马远征</td>
+            <td>1、增加了鱼尾纹维度；2、增加了算法超时错误码</td>
+        </tr>
+        <tr>
+            <td>2020年06月15日</td>
+            <td>1.0.7</td>
+            <td>李孝宇</td>
+            <td>1、增加了遮挡物字段（faceShelter）；2、增加了测肤记录ID(photographId)</td>
+        </tr>
+        <tr>
+            <td>2020年07月23日</td>
+            <td>1.0.8</td>
+            <td>李孝宇</td>
+            <td>1、增加了眉间纹；2、细纹 Wrinkles 下增加面积字段</td>
+        </tr>
+        <tr>
+            <td>2020年08月20日</td>
+            <td>1.0.9</td>
+            <td>李孝宇</td>
+            <td>1、增加了眉间纹；2、细纹 Wrinkles 下增加面积字段</td>
+        </tr>
+        <tr>
+            <td>2020年09月24日</td>
+            <td>1.1.0</td>
+            <td>马远征</td>
+            <td>1、增加文案、icon、蒙版、可视化图片输出</td>
+        </tr>
+        <tr>
             <td>2020年10月16日</td>
             <td>2.0.0</td>
             <td>马远征</td>
-            <td>1、新增测肤输出参数，包括Location和缺水缺油、敏感、面积占比  2、改进SDK架构，优化性能 </td>
+            <td>1.新增油分整脸情况字段oilOverall；2.新增水分整脸情况字段moistureOverall；3.新增敏感整脸情况字段sensitivityOverall；4.新增对应原图的人脸区域坐标字段orgImageFaceLocation。 </td>
         </tr>
     </tbody>
 </table>
@@ -443,13 +473,18 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
 - **图片质量检测**：检测图片光照和是否模糊；
 - **人脸姿态检测**：检测人脸姿态角度；
 - **遮挡物检测**：检测人脸遮挡物（帽子、刘海、眼镜、鼻贴、口罩、面膜）；
+- **相似明星脸检测**：检测相似明星脸：明星名称、相似度、明星图片；
+
 
 --- 
 
+
+
 ### 4.2 类别描述
-| 属性     | 类别                                                         |
-| -------- | ------------------------------------------------------------ |
-| 性别     | 男、女                                                       |
+
+| 属性      |    类别  |   
+| :-------- | :--------| 
+| 性别    |   男、女    | 
 | 肤色     | 黝黑、暗哑、小麦、自然、红润、亮白                           |
 | 脸型     | 方脸、圆脸、鹅蛋脸、心形脸                                   |
 | 痘痘     | 凹陷瘢痕、痘后红斑、粉刺、炎症丘疹、结节囊肿、脓包           |
@@ -465,6 +500,8 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
 | 图片质量 | 光照：正常、黑暗、过曝、光照不均匀；模糊：正常、模糊         |
 | 人脸姿态 | Pitch、 Roll、Yaw                                            |
 | 遮挡物  | 帽子、刘海、眼镜、鼻贴、口罩、面膜                                 |
+
+
 
 --- 
 
@@ -499,7 +536,7 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
 
 --- 
 
-### 4.4 结果返回
+## 结果返回
 <table width="100%" style="border-spacing: 0;  border-collapse: collapse;">
     <thead>
         <tr>
@@ -509,11 +546,6 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
         </tr>
     </thead>
     <tbody> 
-          <tr>
-            <td> photographId </td>
-            <td>string</td>
-            <td>测肤记录ID</td>
-        </tr>
         <tr>
             <td>blackHead</td>
             <td>object</td>
@@ -530,6 +562,11 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>黑头数量</td>
         </tr>
         <tr>
+             <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+             <td>String</td>
+             <td>黑头图层图片</td>
+        </tr>
+        <tr>
             <td>pore</td>
             <td>object</td>
             <td>毛孔</td>
@@ -544,6 +581,10 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>number</td>
             <td>毛孔数量</td>
         </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>毛孔图层图片</td>
         <tr>
             <td>facecolor</td>
             <td>String</td>
@@ -690,49 +731,24 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>严重程度（1-无眼袋，2-轻微，3-严重）</td>
         </tr>
         <tr>
-            <td>faceShelter</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>眼袋图层图片</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;overallArea</td>
             <td>object</td>
-            <td>遮挡物</td>
+            <td>面积</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;exist</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left</td>
             <td>number</td>
-            <td>有无遮挡物（1-无遮挡物，2-有遮挡物）</td>
+            <td>左边面积值</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;types</td>
-            <td> object </td>
-            <td>遮挡物种类</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hat</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right</td>
             <td>number</td>
-            <td>帽子（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hair</td>
-            <td>number</td>
-            <td>刘海（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glass</td>
-            <td>number</td>
-            <td>眼镜（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sticker</td>
-            <td>number</td>
-            <td>鼻贴（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mask</td>
-            <td>number</td>
-            <td>口罩（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facial</td>
-            <td>number</td>
-            <td>面膜（0-无，1-存在）</td>
+            <td>右边面积值</td>
         </tr>
         <tr>
             <td>furrows</td>
@@ -745,9 +761,14 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>细纹列表</td>
         </tr>
         <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>面积值</td>
+        </tr>
+        <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;wrinkleTypeId</td>
             <td>number</td>
-            <td>细纹类型（1-抬头纹，2-法令纹，3-泪沟，4-笑肌断层，5-鱼尾纹，6-眉间纹）</td>
+            <td>细纹类型（1-抬头纹，2-法令纹，3-泪沟，4-笑肌断层, 5-鱼尾纹,6-眉间纹）</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
@@ -765,14 +786,34 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>右边面积值(只有法令纹和鱼尾纹有左右面积)</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;overallArea</td>
+            <td>object</td>
+            <td>整体面积值</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left</td>
             <td>number</td>
-            <td>面积值(除法令纹和鱼尾纹外其他都不分左右面积)</td>
+            <td>左边面积值(只有法令纹和鱼尾纹有左右面积)</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right</td>
+            <td>number</td>
+            <td>右边面积值(只有法令纹和鱼尾纹有左右面积)</td>
         </tr>
         <tr>
             <td>pigmentations</td>
             <td>list</td>
             <td>色素斑列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>面积值</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>面积占比</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;pigmentationTypeId</td>
@@ -812,13 +853,12 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
         <tr>
             <td>sensitivity</td>
             <td>object</td>
-            <td>敏感度列表</td>
+            <td>敏感度</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityCategory</td>
             <td>list</td>
-            <td>敏感度列表</td>
-        </tr>
+            <td>敏感度类型列表</td>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level</td>
             <td>number</td>
@@ -828,6 +868,31 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facePart</td>
             <td>number</td>
             <td>部位（1-额头，2-鼻子，3-左脸，4-右脸，5-下颌）</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityMaskPath</td>
+            <td>String</td>
+            <td>敏感图层图片</td>
+        </tr>
+            <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityOverall</td>
+            <td>object</td>
+            <td>敏感整脸的情况</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>敏感面积占比</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>敏感面积占比</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>敏感严重程度（1：无 2：轻度 3：中度 4：重度）</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;typeId</td>
@@ -899,9 +964,18 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>脂肪粒类型（1-汗管瘤，2-栗丘疹）</td>
         </tr>
         <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>脂肪粒图层图片</td>
+        <tr>
             <td>wrinkleLayer</td>
             <td>string</td>
             <td>细纹图层图片</td>
+        </tr>
+        <tr>
+            <td>crowfeetMaskPath</td>
+            <td>string</td>
+            <td>鱼尾纹图层图片</td>
         </tr>
         <tr>
             <td>acneLayer</td>
@@ -912,6 +986,21 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>pigmentationLayer</td>
             <td>string</td>
             <td>色斑图层图片</td>
+        </tr>
+        <tr>
+            <td>darkCircleMaskPath</td>
+            <td>string</td>
+            <td>黑眼圈图层图片</td>
+        </tr>
+        <tr>
+            <td>moistureMaskPath</td>
+            <td>string</td>
+            <td>水分图层图片</td>
+        </tr>
+        <tr>
+            <td>oilMaskPath</td>
+            <td>string</td>
+            <td>油分图层图片</td>
         </tr>
         <tr>
             <td>sex</td>
@@ -954,24 +1043,94 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>平面内旋转的角度</td>
         </tr>
         <tr>
-            <td>moistureOverall</td>
+            <td>photographId</td>
+            <td>String</td>
+            <td>测肤记录ID</td>
+        </tr>
+        <tr>
+            <td>faceShelter</td>
             <td>Object</td>
-            <td>水分整脸的情况</td>
+            <td>遮挡物</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;exist</td>
             <td>number</td>
-            <td>缺水面积</td>
+            <td>有无遮挡物（0-无遮挡物，1-有遮挡物）</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
-            <td>number</td>
-            <td>缺水面积占比</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;types</td>
+            <td>Object</td>
+            <td>遮挡物种类</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hat</td>
             <td>number</td>
-            <td>严重等级（1：滋润 2：轻度缺水 3：重度缺水）</td>
+            <td>帽子（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hair</td>
+            <td>number</td>
+            <td>刘海（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glass</td>
+            <td>number</td>
+            <td>眼镜（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sticker</td>
+            <td>number</td>
+            <td>鼻贴（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mask</td>
+            <td>number</td>
+            <td>口罩（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facial</td>
+            <td>number</td>
+            <td>面膜（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>basemapPaths</td>
+            <td>Object</td>
+            <td>底图</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path1</td>
+            <td>String</td>
+            <td>底图1URL,颜色为#809ED1（痘痘、色斑、黑头、脂肪粒维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path2</td>
+            <td>String</td>
+            <td>底图2URL,颜色为#B6D0C9（水、油、细纹维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path3</td>
+            <td>String</td>
+            <td>底图3URL,颜色为#FFEECF（黑眼圈、卧蚕、眼袋、毛孔维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>starResult</td>
+            <td>Object</td>
+            <td>相似明星脸</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;name</td>
+            <td>String</td>
+            <td>明星名称</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;similarity</td>
+            <td>number</td>
+            <td>相似度</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;starPath</td>
+            <td>String</td>
+            <td>明星图片</td>
         </tr>
         <tr>
             <td>oilOverall</td>
@@ -994,6 +1153,26 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>严重等级（1：不出油 2：轻度出油 3：重度出油）</td>
         </tr>
         <tr>
+            <td>moistureOverall</td>
+            <td>Object</td>
+            <td>水分整脸的情况</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>缺水面积</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>缺水面积占比</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1：滋润 2：轻度缺水 3：重度缺水））</td>
+        </tr>
+        <tr>
             <td>orgimageFaceLocation</td>
             <td>Array</td>
             <td>原图人脸坐标[x1,y1,x2,y2,rows,cols],包括左上角和右下角,原图大小（高X宽）</td>
@@ -1001,10 +1180,273 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
     </tbody>
 </table>
 
+**示例**
 
---- 
+```
+{
+    "code": 0,
+    "data": {
+        "furrows": 2,
+        "photographId": "5f87a804bcd3340012168a4b",
+        "starResult": {
+            "similarity": 91,
+            "name": "李溪芮",
+            "starPath": "http://skintest.hetyj.com/218d5488b5102ecd7f758a5d50b9a169.jpg"
+        },
+        "pore": {
+            "level": 1,
+            "number": 0,
+            "maskPath": ""
+        },
+        "oilMaskPath": "",
+        "oilOverall": {
+            "level": 1,
+            "area": 0,
+            "areaRatio": 0.0
+        },
+        "wrinkles": [{
+            "level": 1,
+            "area": 0,
+            "wrinkleTypeId": 6
+        }, {
+            "level": 1,
+            "area": 0,
+            "wrinkleTypeId": 1
+        }, {
+            "level": 1,
+            "area": 0,
+            "left": 0,
+            "right": 0,
+            "wrinkleTypeId": 2,
+            "overallArea": {
+                "left": 0,
+                "right": 0
+            }
+        }, {
+            "level": 1,
+            "area": 0,
+            "left": 0,
+            "right": 0,
+            "wrinkleTypeId": 5,
+            "overallArea": {
+                "left": 0,
+                "right": 0
+            }
+        }, {
+            "level": 2,
+            "area": 2671,
+            "wrinkleTypeId": 3
+        }, {
+            "level": 1,
+            "area": 0,
+            "wrinkleTypeId": 4
+        }],
+        "pigmentationLayer": "",
+        "oil": [{
+            "level": 1,
+            "facePart": 2
+        }, {
+            "level": 1,
+            "facePart": 5
+        }, {
+            "level": 1,
+            "facePart": 1
+        }, {
+            "level": 1,
+            "facePart": 4
+        }, {
+            "level": 1,
+            "facePart": 3
+        }],
+        "skinType": 3,
+        "darkCircle": [{
+            "type": 2,
+            "level": 2,
+            "position": 1
+        }, {
+            "type": 2,
+            "level": 2,
+            "position": 2
+        }],
+        "eyeshape": {
+            "eyelid": 1,
+            "narrow": 3,
+            "updown": 2
+        },
+        "facePose": {
+            "pitch": "14.45",
+            "roll": "0.08",
+            "yam": "-1.59"
+        },
+        "faceshape": "H",
+        "moistureMaskPath": "",
+        "fatGranule": [{
+            "fatGranuleTypeId": 2,
+            "number": 0,
+            "level": 1,
+            "maskPath": ""
+        }],
+        "blackHead": {
+            "level": 1,
+            "number": 0,
+            "maskPath": ""
+        },
+        "imageQuality": {
+            "lightType": 1,
+            "blurType": 0
+        },
+        "acneLayer": "",
+        "eyebrow": {
+            "left": 2,
+            "right": 2
+        },
+        "darkCircleMaskPath": "http://skintest.hetyj.com/4f1cdd01320fca8d425595bfe90e1629.png",
+        "pouch": {
+            "exist": 1,
+            "level": 1,
+            "maskPath": "",
+            "overallArea": {
+                "left": 0,
+                "right": 0
+            }
+        },
+        "sex": 2,
+        "faceShelter": {
+            "exist": 0,
+            "types": {
+                "hat": null,
+                "hair": null,
+                "glass": null,
+                "sticker": null,
+                "mask": null,
+                "facial": null
+            }
+        },
+        "orgimageFaceLocation": [148, 301, 1895, 2714, 4032, 2145],
+        "wrinkleLayer": "http://skintest.hetyj.com/d047e9e8f84b25c45e415909f9db578a.png",
+        "moisture": [{
+            "level": 1,
+            "facePart": 2,
+            "className": 1
+        }, {
+            "level": 1,
+            "facePart": 5,
+            "className": 1
+        }, {
+            "level": 1,
+            "facePart": 1,
+            "className": 1
+        }, {
+            "level": 1,
+            "facePart": 4,
+            "className": 1
+        }, {
+            "level": 1,
+            "facePart": 3,
+            "className": 1
+        }],
+        "pigmentations": [{
+            "level": 1,
+            "area": 0,
+            "pigmentationTypeId": 1,
+            "facePart": 0,
+            "areaRatio": 0.0
+        }, {
+            "level": 1,
+            "area": 0,
+            "pigmentationTypeId": 3,
+            "facePart": 0,
+            "areaRatio": 0.0
+        }, {
+            "level": 1,
+            "area": 0,
+            "pigmentationTypeId": 4,
+            "facePart": 0,
+            "areaRatio": 0.0
+        }, {
+            "level": 1,
+            "area": 0,
+            "pigmentationTypeId": 2,
+            "facePart": 0,
+            "areaRatio": 0.0
+        }],
+        "basemapPaths": {
+            "path1": "",
+            "path2": "http://skintest.hetyj.com/4491f27df51cac50a025f2cf00ddbba3.jpg",
+            "path3": "http://skintest.hetyj.com/20c2ac632a629ee43384c57d17d430d9.jpg"
+        },
+        "isface": 1,
+        "facecolor": "E_5",
+        "crowfeetMaskPath": "",
+        "sensitivity": {
+            "sensitivityCategory": [{
+                "level": 1,
+                "facePart": 2
+            }, {
+                "level": 1,
+                "facePart": 5
+            }, {
+                "level": 2,
+                "facePart": 1
+            }, {
+                "level": 1,
+                "facePart": 4
+            }, {
+                "level": 1,
+                "facePart": 3
+            }],
+            "typeId": 1,
+            "sensitivityOverall": {
+                "level": 1,
+                "area": 0,
+                "areaRatio": 0.0
+            },
+            "sensitivityMaskPath": ""
+        },
+        "moistureOverall": {
+            "level": 1,
+            "area": 0,
+            "areaRatio": 0.0
+        },
+        "acnes": [{
+            "level": 1,
+            "number": 0,
+            "acneTypeId": 1,
+            "facePart": 0
+        }, {
+            "level": 1,
+            "number": 0,
+            "acneTypeId": 3,
+            "facePart": 0
+        }, {
+            "level": 1,
+            "number": 0,
+            "acneTypeId": 2,
+            "facePart": 0
+        }, {
+            "level": 1,
+            "number": 0,
+            "acneTypeId": 6,
+            "facePart": 0
+        }, {
+            "level": 1,
+            "number": 0,
+            "acneTypeId": 4,
+            "facePart": 0
+        }, {
+            "level": 1,
+            "number": 0,
+            "acneTypeId": 5,
+            "facePart": 0
+        }],
+        "skinAge": 22
+    }
+}
 
-### 4.5 错误码
+```
+
+
+## 错误码
 
 <table width="100%" style="border-spacing: 0;  border-collapse: collapse;">
     <tr>
@@ -1197,7 +1639,7 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
         <td>人脸姿态检测错误</td>
         <td>请重试</td>
     </tr>
-        <tr>
+    <tr>
         <td>107003091</td>
         <td>算法服务请求超时</td>
         <td>请重试</td>
@@ -1213,9 +1655,6 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
         <td>本地解析网络数据失败</td>
     </tr>
 </table>
-
-
-
 
 
 
