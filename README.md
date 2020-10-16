@@ -1,6 +1,6 @@
 
-     
-    
+
+
 # SLSkinAnalysisQCloud V2.0.0 SDK iOS平台接入指南 
 
 -----
@@ -22,12 +22,12 @@
         </tr>
     </thead>
     <tbody> 
-		<tr>
-			<td>2020年09月29日</td>
-			<td>2.0.0</td>
-			<td>马远征</td>
+        <tr>
+            <td>2020年09月29日</td>
+            <td>2.0.0</td>
+            <td>马远征</td>
             <td>改进拍照测肤SDK架构，并集成了人脸遮挡物检测功能</td>
-		</tr>
+        </tr>
     </tbody>
 </table>
 
@@ -45,7 +45,7 @@ SDK支持 iOS 9.0 以上设备，请保持Xcode开发工具升级到最新版本
 
 >- [x] 肤质分析 SDK 下载  [SLSkinAnalysisQCloud.framework](https://github.com/iCodingBoyy/SLSkinAnalysis.git)
 >- [x] Demo下载 [SLSkinAnalysisDemo](https://github.com/iCodingBoyy/SLSkinAnalysis.git)
-
+>- [x] 腾讯云存储下载 [QCloud](https://github.com/tencentyun/qcloud-sdk-ios/releases)
 
 ### 2、Xcode 集成
 
@@ -53,11 +53,13 @@ SDK支持 iOS 9.0 以上设备，请保持Xcode开发工具升级到最新版本
 
 2、前往 [ OpenCV ](https://opencv.org/releases/)下载 `opencv2.framework`，选择3.4.x版本即可。
 
-3、添加必要的链接库文件，并在 `Other Link Flags` 选项添加 `-ObjC`
+3、前往腾讯云下载 [QCloud](https://github.com/tencentyun/qcloud-sdk-ios/releases) 拖入到工程，你也可以通过`Cocoapods`集成腾讯云`QCloud`，具体见教程 [iOS SDK文档](https://cloud.tencent.com/document/product/436/11280)
+
+4、添加必要的链接库文件，并在 `Other Link Flags` 选项添加 `-ObjC`
  
  - libc++.tdb
 
-4、在需要使用的地方导入头文件 `#import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>` 即可进入相关开发
+5、在需要使用的地方导入头文件 `#import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>` 即可进入相关开发
 
 
 ---

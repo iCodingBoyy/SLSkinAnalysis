@@ -1,0 +1,279 @@
+{
+    "code":0,
+    "data": {
+        "photographId": "85219599", // 测肤记录id
+        "sex": 1,
+        "skinAge": 32,
+        "skinType": 5,
+        "isface": 1,
+        "furrows": 1,
+        "facecolor": "F_3",
+        "faceshape": "H",
+        "wrinkleLayer": "http://skintest.hetyj.com//test//b2c3689fc6758dda1071168fbf6531ed",
+        "pigmentationLayer": "http://skintest.hetyj.com//test//b2c3689fc6758dda1071168fbf6531ed",
+        "acneLayer": "http://skintest.hetyj.com//test//b2c3689fc6758dda1071168fbf6531ed",
+        "crowfeetMaskPath": "鱼尾纹图层图片",
+        "darkCircleMaskPath": "黑眼圈图层图片",
+        "moistureMaskPath": "水分图层图片",
+        "oilMaskPath": "油分图层图片",
+        "sensitivityMaskPath": "敏感图层图片",
+        "pore": {
+            "level": 3,
+            "number": 224,
+            "maskPath":"毛孔图层图片"
+        },
+        "pouch": {
+            "exist": 1,
+            "level": 1,
+            "maskPath":"眼袋图层图片"
+        },
+        "eyeshape": {
+            "eyelid": 1,
+            "narrow": 3,
+            "updown": 2
+        },
+        "eyebrow": {
+            "left": 2,
+            "right": 2
+        },
+        "blackHead": {
+            "level": 3,
+            "number": 17,
+            "maskPath":"眼袋图层图片"
+        },
+        "facePose": {
+            "pitch": "9.0",
+            "roll": "-0.28",
+            "yam": "9.0"
+        },
+        "imageQuality": {
+            "blurType": "0",
+            "lightType": "1"
+        },
+        "faceShelter": {
+            "exist": 1,
+            "types": {
+                "facial": 1,
+                "glass": 1,
+                "hair": 1,
+                "hat": 1,
+                "mask": 1,
+                "sticker": 1
+            }
+        },
+        "starResult": {
+            "name": "明星名称",
+            "similarity": "80",
+            "starPath": "明星图片"
+        },
+        "sensitivity": {
+            "sensitivityCategory": [
+                {
+                    "level": 1,
+                    "facePart": 1
+                },
+                {
+                    "level": 1,
+                    "facePart": 4
+                },
+                {
+                    "level": 1,
+                    "facePart": 3
+                },
+                {
+                    "level": 1,
+                    "facePart": 5
+                },
+                {
+                    "level": 1,
+                    "facePart": 2
+                }
+            ],
+            "typeId": 1
+        },
+        "wrinkles": [
+            {
+                "wrinkleTypeId": 1,
+                "level": 2,
+                "left": null,
+                "right": null,
+                "area": 1
+            },
+            {
+                "wrinkleTypeId": 2,
+                "level": 2,
+                "left": 0,
+                "right": 0,
+                "area": null
+            },
+            {
+                "wrinkleTypeId": 4,
+                "level": 1,
+                "left": null,
+                "right": null,
+                "area": 333
+            },
+            {
+                "wrinkleTypeId": 3,
+                "level": 3,
+                "left": null,
+                "right": null,
+                "area": 221
+            },
+            {
+                "wrinkleTypeId": 5,
+                "level": 3,
+                "left": 1233,
+                "right": 998,
+                "area": null
+            }
+        ],
+        "pigmentations": [
+            {
+                "pigmentationTypeId": 4,
+                "level": 2,
+                "facePart": 3
+            },
+            {
+                "pigmentationTypeId": 3,
+                "level": 2,
+                "facePart": 5
+            },
+            {
+                "pigmentationTypeId": 2,
+                "level": 2,
+                "facePart": 3
+            },
+            {
+                "pigmentationTypeId": 1,
+                "level": 2,
+                "facePart": 4
+            }
+        ],
+        "darkCircle": [
+            {
+                "position": 1,
+                "type": 1,
+                "level": 1
+            },
+            {
+                "position": 2,
+                "type": 1,
+                "level": 1
+            }
+        ],
+        "oil": [
+            {
+                "level": 3,
+                "facePart": 1
+            },
+            {
+                "level": 2,
+                "facePart": 4
+            },
+            {
+                "level": 1,
+                "facePart": 3
+            },
+            {
+                "level": 2,
+                "facePart": 5
+            },
+            {
+                "level": 2,
+                "facePart": 2
+            }
+        ],
+        "moisture": [
+            {
+                "level": 3,
+                "facePart": 1,
+                "className": 3
+            },
+            {
+                "level": 2,
+                "facePart": 4,
+                "className": 3
+            },
+            {
+                "level": 1,
+                "facePart": 3,
+                "className": 1
+            },
+            {
+                "level": 2,
+                "facePart": 5,
+                "className": 3
+            },
+            {
+                "level": 2,
+                "facePart": 2,
+                "className": 3
+            }
+        ],
+        "acnes": [
+            {
+                "acneTypeId": 5,
+                "level": 2,
+                "number": 1,
+                "facePart": 3
+            },
+            {
+                "acneTypeId": 1,
+                "level": 1,
+                "number": 0,
+                "facePart": 0
+            },
+            {
+                "acneTypeId": 6,
+                "level": 1,
+                "number": 0,
+                "facePart": 0
+            },
+            {
+                "acneTypeId": 3,
+                "level": 2,
+                "number": 3,
+                "facePart": 3
+            },
+            {
+                "acneTypeId": 2,
+                "level": 2,
+                "number": 1,
+                "facePart": 1
+            },
+            {
+                "acneTypeId": 4,
+                "level": 1,
+                "number": 0,
+                "facePart": 0
+            }
+        ],
+        "fatGranule": [
+            {
+                "fatGranuleTypeId": 2,
+                "number": 7,
+                "level": 2,
+                "maskPath": "脂肪粒图层图片"
+            }
+        ],
+        
+        "basemapPaths":{
+            "path1":"底图1URL,颜色为#809ED1（痘痘、色斑、黑头、脂肪粒维度可视化需要）",
+            "path2":"底图2URL,颜色为#B6D0C9（水、油、细纹维度可视化需要）",
+            "path3":"底图3URL,颜色为#FFEECF（黑眼圈、卧蚕、眼袋、毛孔维度可视化需要）"
+        },
+        "orgimageFaceLocation":[432,212,1552,1889,2663,2000],
+        "oilOverall":{
+            "area":201,
+            "areaRatio":6.9,
+            "level":3
+        },
+        "moistureOverall":{
+            "area":1376,
+            "areaRatio":47.24,
+            "level":3
+        }
+
+    }
+}

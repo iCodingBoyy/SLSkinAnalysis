@@ -160,22 +160,6 @@
 		<data>
 		iG4t4H2qjj8L9EpigPRRzsjQ9uk=
 		</data>
-		<key>face_landmark_model.het</key>
-		<data>
-		A8gSNDnqupY0nljXTKqTZKKbCU8=
-		</data>
-		<key>opencv_face_detector.het</key>
-		<data>
-		foCmOGj2Ck2GzR2t1leQlcuvuUY=
-		</data>
-		<key>opencv_face_detector_uint8.het</key>
-		<data>
-		NR1ka0yu/2eObPuIyCWMoOwjG2E=
-		</data>
-		<key>test_graph_qu.het</key>
-		<data>
-		owYBODbjEiTkktPiV8bJiFvbrS4=
-		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -595,50 +579,6 @@
 			<key>hash2</key>
 			<data>
 			mf/7ZymDR1ru6Y3iEcgvOtSh5L0x3L10EEewAaDrPYg=
-			</data>
-		</dict>
-		<key>face_landmark_model.het</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			A8gSNDnqupY0nljXTKqTZKKbCU8=
-			</data>
-			<key>hash2</key>
-			<data>
-			D3gQPN39ldqoQ6Ii1akQRBYpyNCka2ac/FEYQ0NhoCk=
-			</data>
-		</dict>
-		<key>opencv_face_detector.het</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			foCmOGj2Ck2GzR2t1leQlcuvuUY=
-			</data>
-			<key>hash2</key>
-			<data>
-			hh46pEX6bErRgmlW0MEMcIWVB59vGSm7oc/2ONzUhdk=
-			</data>
-		</dict>
-		<key>opencv_face_detector_uint8.het</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			NR1ka0yu/2eObPuIyCWMoOwjG2E=
-			</data>
-			<key>hash2</key>
-			<data>
-			R7FBqgXO3K2aH3+fE6e278sLmN0Rybr1wf/6AoZQpUo=
-			</data>
-		</dict>
-		<key>test_graph_qu.het</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			owYBODbjEiTkktPiV8bJiFvbrS4=
-			</data>
-			<key>hash2</key>
-			<data>
-			88xjZcEC/xAEw0EqwMswdPPB/+1Z/rhJTRiFxklGgIQ=
 			</data>
 		</dict>
 	</dict>
