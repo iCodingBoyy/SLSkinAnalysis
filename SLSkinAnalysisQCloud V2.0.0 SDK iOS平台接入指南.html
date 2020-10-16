@@ -29,17 +29,45 @@
     </thead>
     <tbody> 
         <tr>
+            <td>2020年06月15日</td>
+            <td>1.0.6</td>
+            <td>马远征</td>
+            <td>1、增加了鱼尾纹维度；2、增加了算法超时错误码</td>
+        </tr>
+        <tr>
+            <td>2020年06月15日</td>
+            <td>1.0.7</td>
+            <td>李孝宇</td>
+            <td>1、增加了遮挡物字段（faceShelter）；2、增加了测肤记录ID(photographId)</td>
+        </tr>
+        <tr>
+            <td>2020年07月23日</td>
+            <td>1.0.8</td>
+            <td>李孝宇</td>
+            <td>1、增加了眉间纹；2、细纹 Wrinkles 下增加面积字段</td>
+        </tr>
+        <tr>
+            <td>2020年08月20日</td>
+            <td>1.0.9</td>
+            <td>李孝宇</td>
+            <td>1、增加了眉间纹；2、细纹 Wrinkles 下增加面积字段</td>
+        </tr>
+        <tr>
+            <td>2020年09月24日</td>
+            <td>1.1.0</td>
+            <td>马远征</td>
+            <td>1、增加文案、icon、蒙版、可视化图片输出</td>
+        </tr>
+        <tr>
             <td>2020年10月16日</td>
             <td>2.0.0</td>
             <td>马远征</td>
-            <td>1、新增测肤输出参数，包括Location和缺水缺油、敏感、面积占比  2、新增遮挡物检测功能，改进SDK架构，优化性能 </td>
+            <td>1.新增油分整脸情况字段oilOverall；2.新增水分整脸情况字段moistureOverall；3.新增敏感整脸情况字段sensitivityOverall；4.新增对应原图的人脸区域坐标字段orgImageFaceLocation。5、新增遮挡物检测功能 </td>
         </tr>
     </tbody>
 </table>
 
 <hr>
-
-
 
 <h2 id="一平台授权">一、平台授权</h2>
 
@@ -532,17 +560,16 @@
 <li><p><strong>图片质量检测</strong>：检测图片光照和是否模糊；</p></li>
 <li><p><strong>人脸姿态检测</strong>：检测人脸姿态角度；</p></li>
 <li><p><strong>遮挡物检测</strong>：检测人脸遮挡物（帽子、刘海、眼镜、鼻贴、口罩、面膜）；</p></li>
+<li><p><strong>相似明星脸检测</strong>：检测相似明星脸：明星名称、相似度、明星图片；</p></li>
 </ul>
 
 <hr>
 
-
-
 <h3 id="42-类别描述">4.2 类别描述</h3>
 
-<h2 id="属性-类别-性别-男女-肤色-黝黑暗哑小麦自然红润亮白-脸型-方脸圆脸鹅蛋脸心形脸-痘痘-凹陷瘢痕痘后红斑粉刺炎症丘疹结节囊肿脓包-眼型-杏眼小鹿眼铜铃眼睡龙眼丹凤眼瑞凤眼睡凤眼月牙眼桃花眼柳叶眼狐媚眼孔雀眼-眉形-柳叶眉平直眉秋波眉秋娘眉双燕眉水弯眉-细纹-抬头纹法令纹泪沟笑肌断层-色素斑-黄褐斑雀斑隐藏斑黑痣-敏感-耐受敏感-水分-滋润敏感性缺水油脂性缺水老化性缺水-肤质类型-干性中性偏干中性混合性偏干混合性混合性偏油油性-黑眼圈-正常血管型色素型-脂肪粒-栗丘疹-图片质量-光照正常黑暗过曝光照不均匀模糊正常模糊-人脸姿态-pitch-rollyaw-遮挡物-帽子刘海眼镜鼻贴口罩面膜"><table><tbody><tr style="font-weight:bold">  <td>属性</td>  <td>类别</td></tr><tr>  <td>性别</td>  <td>男、女</td></tr><tr>  <td>肤色</td>  <td>黝黑、暗哑、小麦、自然、红润、亮白</td></tr><tr>  <td>脸型</td>  <td>方脸、圆脸、鹅蛋脸、心形脸</td></tr><tr>  <td>痘痘</td>  <td>凹陷瘢痕、痘后红斑、粉刺、炎症丘疹、结节囊肿、脓包</td></tr><tr>  <td>眼型</td>  <td>杏眼、小鹿眼、铜铃眼、睡龙眼、丹凤眼、瑞凤眼、睡凤眼、月牙眼、桃花眼、柳叶眼、狐媚眼、孔雀眼</td></tr><tr>  <td>眉形</td>  <td>柳叶眉、平直眉、秋波眉、秋娘眉、双燕眉、水弯眉</td></tr><tr>  <td>细纹</td>  <td>抬头纹、法令纹、泪沟、笑肌断层</td></tr><tr>  <td>色素斑</td>  <td>黄褐斑、雀斑、隐藏斑、黑痣</td></tr><tr>  <td>敏感</td>  <td>耐受、敏感</td></tr><tr>  <td>水分</td>  <td>滋润、敏感性缺水、油脂性缺水、老化性缺水</td></tr><tr>  <td>肤质类型</td>  <td>干性、中性偏干、中性、混合性偏干、混合性、混合性偏油、油性</td></tr><tr>  <td>黑眼圈</td>  <td>正常、血管型、色素型</td></tr><tr>  <td>脂肪粒</td>  <td>栗丘疹</td></tr><tr>  <td>图片质量</td>  <td>光照：正常、黑暗、过曝、光照不均匀；模糊：正常、模糊</td></tr><tr>  <td>人脸姿态</td>  <td>Pitch、 Roll、Yaw</td></tr><tr>  <td>遮挡物</td>  <td>帽子、刘海、眼镜、鼻贴、口罩、面膜</td></tr></tbody></table></h2>
+<table><tbody><tr style="font-weight:bold">  <td align="left">属性</td>  <td align="left">类别</td></tr><tr>  <td align="left">性别</td>  <td align="left">男、女</td></tr><tr>  <td align="left">肤色</td>  <td align="left">黝黑、暗哑、小麦、自然、红润、亮白</td></tr><tr>  <td align="left">脸型</td>  <td align="left">方脸、圆脸、鹅蛋脸、心形脸</td></tr><tr>  <td align="left">痘痘</td>  <td align="left">凹陷瘢痕、痘后红斑、粉刺、炎症丘疹、结节囊肿、脓包</td></tr><tr>  <td align="left">眼型</td>  <td align="left">杏眼、小鹿眼、铜铃眼、睡龙眼、丹凤眼、瑞凤眼、睡凤眼、月牙眼、桃花眼、柳叶眼、狐媚眼、孔雀眼</td></tr><tr>  <td align="left">眉形</td>  <td align="left">柳叶眉、平直眉、秋波眉、秋娘眉、双燕眉、水弯眉</td></tr><tr>  <td align="left">细纹</td>  <td align="left">抬头纹、法令纹、泪沟、笑肌断层</td></tr><tr>  <td align="left">色素斑</td>  <td align="left">黄褐斑、雀斑、隐藏斑、黑痣</td></tr><tr>  <td align="left">敏感</td>  <td align="left">耐受、敏感</td></tr><tr>  <td align="left">水分</td>  <td align="left">滋润、敏感性缺水、油脂性缺水、老化性缺水</td></tr><tr>  <td align="left">肤质类型</td>  <td align="left">干性、中性偏干、中性、混合性偏干、混合性、混合性偏油、油性</td></tr><tr>  <td align="left">黑眼圈</td>  <td align="left">正常、血管型、色素型</td></tr><tr>  <td align="left">脂肪粒</td>  <td align="left">栗丘疹</td></tr><tr>  <td align="left">图片质量</td>  <td align="left">光照：正常、黑暗、过曝、光照不均匀；模糊：正常、模糊</td></tr><tr>  <td align="left">人脸姿态</td>  <td align="left">Pitch、 Roll、Yaw</td></tr><tr>  <td align="left">遮挡物</td>  <td align="left">帽子、刘海、眼镜、鼻贴、口罩、面膜</td></tr></tbody></table>
 
-
+<hr>
 
 <h3 id="43-注意事项">4.3 注意事项</h3>
 
@@ -565,7 +592,7 @@
 
 
 
-<h3 id="44-结果返回">4.4 结果返回</h3>
+<h2 id="结果返回">结果返回</h2>
 
 <table width="100%" style="border-spacing: 0;  border-collapse: collapse;">
     <thead>
@@ -576,11 +603,6 @@
         </tr>
     </thead>
     <tbody> 
-          <tr>
-            <td> photographId </td>
-            <td>string</td>
-            <td>测肤记录ID</td>
-        </tr>
         <tr>
             <td>blackHead</td>
             <td>object</td>
@@ -595,6 +617,11 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;number</td>
             <td>number</td>
             <td>黑头数量</td>
+        </tr>
+        <tr>
+             <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+             <td>String</td>
+             <td>黑头图层图片</td>
         </tr>
         <tr>
             <td>pore</td>
@@ -612,6 +639,10 @@
             <td>毛孔数量</td>
         </tr>
         <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>毛孔图层图片</td>
+        </tr><tr>
             <td>facecolor</td>
             <td>String</td>
             <td>肤色（F_3 代表第F行第3列的肤色块)</td>
@@ -757,49 +788,24 @@
             <td>严重程度（1-无眼袋，2-轻微，3-严重）</td>
         </tr>
         <tr>
-            <td>faceShelter</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>眼袋图层图片</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;overallArea</td>
             <td>object</td>
-            <td>遮挡物</td>
+            <td>面积</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;exist</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left</td>
             <td>number</td>
-            <td>有无遮挡物（1-无遮挡物，2-有遮挡物）</td>
+            <td>左边面积值</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;types</td>
-            <td> object </td>
-            <td>遮挡物种类</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hat</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right</td>
             <td>number</td>
-            <td>帽子（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hair</td>
-            <td>number</td>
-            <td>刘海（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glass</td>
-            <td>number</td>
-            <td>眼镜（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sticker</td>
-            <td>number</td>
-            <td>鼻贴（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mask</td>
-            <td>number</td>
-            <td>口罩（0-无，1-存在）</td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facial</td>
-            <td>number</td>
-            <td>面膜（0-无，1-存在）</td>
+            <td>右边面积值</td>
         </tr>
         <tr>
             <td>furrows</td>
@@ -812,9 +818,14 @@
             <td>细纹列表</td>
         </tr>
         <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>面积值</td>
+        </tr>
+        <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;wrinkleTypeId</td>
             <td>number</td>
-            <td>细纹类型（1-抬头纹，2-法令纹，3-泪沟，4-笑肌断层，5-鱼尾纹，6-眉间纹）</td>
+            <td>细纹类型（1-抬头纹，2-法令纹，3-泪沟，4-笑肌断层, 5-鱼尾纹,6-眉间纹）</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
@@ -832,14 +843,34 @@
             <td>右边面积值(只有法令纹和鱼尾纹有左右面积)</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;overallArea</td>
+            <td>object</td>
+            <td>整体面积值</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left</td>
             <td>number</td>
-            <td>面积值(除法令纹和鱼尾纹外其他都不分左右面积)</td>
+            <td>左边面积值(只有法令纹和鱼尾纹有左右面积)</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right</td>
+            <td>number</td>
+            <td>右边面积值(只有法令纹和鱼尾纹有左右面积)</td>
         </tr>
         <tr>
             <td>pigmentations</td>
             <td>list</td>
             <td>色素斑列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>面积值</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>面积占比</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;pigmentationTypeId</td>
@@ -879,14 +910,13 @@
         <tr>
             <td>sensitivity</td>
             <td>object</td>
-            <td>敏感度列表</td>
+            <td>敏感度</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityCategory</td>
             <td>list</td>
-            <td>敏感度列表</td>
-        </tr>
-        <tr>
+            <td>敏感度类型列表</td>
+        </tr><tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level</td>
             <td>number</td>
             <td>严重等级（1-无，2-轻度，3-中度, 4-重度）</td>
@@ -895,6 +925,31 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facePart</td>
             <td>number</td>
             <td>部位（1-额头，2-鼻子，3-左脸，4-右脸，5-下颌）</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityMaskPath</td>
+            <td>String</td>
+            <td>敏感图层图片</td>
+        </tr>
+            <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityOverall</td>
+            <td>object</td>
+            <td>敏感整脸的情况</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>敏感面积占比</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>敏感面积占比</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>敏感严重程度（1：无 2：轻度 3：中度 4：重度）</td>
         </tr>
         <tr>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;typeId</td>
@@ -966,9 +1021,18 @@
             <td>脂肪粒类型（1-汗管瘤，2-栗丘疹）</td>
         </tr>
         <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>脂肪粒图层图片</td>
+        </tr><tr>
             <td>wrinkleLayer</td>
             <td>string</td>
             <td>细纹图层图片</td>
+        </tr>
+        <tr>
+            <td>crowfeetMaskPath</td>
+            <td>string</td>
+            <td>鱼尾纹图层图片</td>
         </tr>
         <tr>
             <td>acneLayer</td>
@@ -979,6 +1043,21 @@
             <td>pigmentationLayer</td>
             <td>string</td>
             <td>色斑图层图片</td>
+        </tr>
+        <tr>
+            <td>darkCircleMaskPath</td>
+            <td>string</td>
+            <td>黑眼圈图层图片</td>
+        </tr>
+        <tr>
+            <td>moistureMaskPath</td>
+            <td>string</td>
+            <td>水分图层图片</td>
+        </tr>
+        <tr>
+            <td>oilMaskPath</td>
+            <td>string</td>
+            <td>油分图层图片</td>
         </tr>
         <tr>
             <td>sex</td>
@@ -1021,24 +1100,94 @@
             <td>平面内旋转的角度</td>
         </tr>
         <tr>
-            <td>moistureOverall</td>
+            <td>photographId</td>
+            <td>String</td>
+            <td>测肤记录ID</td>
+        </tr>
+        <tr>
+            <td>faceShelter</td>
             <td>Object</td>
-            <td>水分整脸的情况</td>
+            <td>遮挡物</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;exist</td>
             <td>number</td>
-            <td>缺水面积</td>
+            <td>有无遮挡物（0-无遮挡物，1-有遮挡物）</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
-            <td>number</td>
-            <td>缺水面积占比</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;types</td>
+            <td>Object</td>
+            <td>遮挡物种类</td>
         </tr>
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hat</td>
             <td>number</td>
-            <td>严重等级（1：滋润 2：轻度缺水 3：重度缺水）</td>
+            <td>帽子（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hair</td>
+            <td>number</td>
+            <td>刘海（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glass</td>
+            <td>number</td>
+            <td>眼镜（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sticker</td>
+            <td>number</td>
+            <td>鼻贴（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mask</td>
+            <td>number</td>
+            <td>口罩（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facial</td>
+            <td>number</td>
+            <td>面膜（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>basemapPaths</td>
+            <td>Object</td>
+            <td>底图</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path1</td>
+            <td>String</td>
+            <td>底图1URL,颜色为#809ED1（痘痘、色斑、黑头、脂肪粒维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path2</td>
+            <td>String</td>
+            <td>底图2URL,颜色为#B6D0C9（水、油、细纹维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path3</td>
+            <td>String</td>
+            <td>底图3URL,颜色为#FFEECF（黑眼圈、卧蚕、眼袋、毛孔维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>starResult</td>
+            <td>Object</td>
+            <td>相似明星脸</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;name</td>
+            <td>String</td>
+            <td>明星名称</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;similarity</td>
+            <td>number</td>
+            <td>相似度</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;starPath</td>
+            <td>String</td>
+            <td>明星图片</td>
         </tr>
         <tr>
             <td>oilOverall</td>
@@ -1061,6 +1210,26 @@
             <td>严重等级（1：不出油 2：轻度出油 3：重度出油）</td>
         </tr>
         <tr>
+            <td>moistureOverall</td>
+            <td>Object</td>
+            <td>水分整脸的情况</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>缺水面积</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>缺水面积占比</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1：滋润 2：轻度缺水 3：重度缺水））</td>
+        </tr>
+        <tr>
             <td>orgimageFaceLocation</td>
             <td>Array</td>
             <td>原图人脸坐标[x1,y1,x2,y2,rows,cols],包括左上角和右下角,原图大小（高X宽）</td>
@@ -1068,11 +1237,275 @@
     </tbody>
 </table>
 
-<hr>
+<p><strong>示例</strong></p>
 
 
 
-<h3 id="45-错误码">4.5 错误码</h3>
+<pre class="prettyprint hljs-dark"><code class="hljs json"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attr">"code"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">    <span class="hljs-attr">"data"</span>: {
+</div><div class="hljs-line">        <span class="hljs-attr">"furrows"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"photographId"</span>: <span class="hljs-string">"5f87a804bcd3340012168a4b"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"starResult"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"similarity"</span>: <span class="hljs-number">91</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"李溪芮"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"starPath"</span>: <span class="hljs-string">"http://skintest.hetyj.com/218d5488b5102ecd7f758a5d50b9a169.jpg"</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"pore"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"maskPath"</span>: <span class="hljs-string">""</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"oilMaskPath"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"oilOverall"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"wrinkles"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">6</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"overallArea"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">5</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"overallArea"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">2671</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">3</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">4</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"pigmentationLayer"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"oil"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">5</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">4</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">3</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"skinType"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"darkCircle"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"type"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"position"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"type"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"position"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"eyeshape"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"eyelid"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"narrow"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"updown"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"facePose"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"pitch"</span>: <span class="hljs-string">"14.45"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"roll"</span>: <span class="hljs-string">"0.08"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"yam"</span>: <span class="hljs-string">"-1.59"</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"faceshape"</span>: <span class="hljs-string">"H"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"moistureMaskPath"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"fatGranule"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"fatGranuleTypeId"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"maskPath"</span>: <span class="hljs-string">""</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"blackHead"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"maskPath"</span>: <span class="hljs-string">""</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"imageQuality"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"lightType"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"blurType"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"acneLayer"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"eyebrow"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"left"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"right"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"darkCircleMaskPath"</span>: <span class="hljs-string">"http://skintest.hetyj.com/4f1cdd01320fca8d425595bfe90e1629.png"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"pouch"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"exist"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"maskPath"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"overallArea"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"sex"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"faceShelter"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"exist"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"types"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"hat"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"hair"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"glass"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"sticker"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"mask"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facial"</span>: <span class="hljs-literal">null</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"orgimageFaceLocation"</span>: [<span class="hljs-number">148</span>, <span class="hljs-number">301</span>, <span class="hljs-number">1895</span>, <span class="hljs-number">2714</span>, <span class="hljs-number">4032</span>, <span class="hljs-number">2145</span>],
+</div><div class="hljs-line">        <span class="hljs-attr">"wrinkleLayer"</span>: <span class="hljs-string">"http://skintest.hetyj.com/d047e9e8f84b25c45e415909f9db578a.png"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"moisture"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">5</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">4</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"pigmentations"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"pigmentationTypeId"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"pigmentationTypeId"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"pigmentationTypeId"</span>: <span class="hljs-number">4</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"pigmentationTypeId"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"basemapPaths"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"path1"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"path2"</span>: <span class="hljs-string">"http://skintest.hetyj.com/4491f27df51cac50a025f2cf00ddbba3.jpg"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"path3"</span>: <span class="hljs-string">"http://skintest.hetyj.com/20c2ac632a629ee43384c57d17d430d9.jpg"</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"isface"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"facecolor"</span>: <span class="hljs-string">"E_5"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"crowfeetMaskPath"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"sensitivity"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"sensitivityCategory"</span>: [{
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">            }, {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">5</span>
+</div><div class="hljs-line">            }, {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">            }, {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">4</span>
+</div><div class="hljs-line">            }, {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">3</span>
+</div><div class="hljs-line">            }],
+</div><div class="hljs-line">            <span class="hljs-attr">"typeId"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"sensitivityOverall"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">            },
+</div><div class="hljs-line">            <span class="hljs-attr">"sensitivityMaskPath"</span>: <span class="hljs-string">""</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"moistureOverall"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"acnes"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">6</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">4</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">5</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"skinAge"</span>: <span class="hljs-number">22</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h2 id="错误码">错误码</h2>
 
 <table width="100%" style="border-spacing: 0;  border-collapse: collapse;">
     <tbody><tr>
@@ -1265,7 +1698,7 @@
         <td>人脸姿态检测错误</td>
         <td>请重试</td>
     </tr>
-        <tr>
+    <tr>
         <td>107003091</td>
         <td>算法服务请求超时</td>
         <td>请重试</td>
