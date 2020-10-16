@@ -23,10 +23,10 @@
     </thead>
     <tbody> 
         <tr>
-            <td>2020年09月29日</td>
+            <td>2020年10月16日</td>
             <td>2.0.0</td>
             <td>马远征</td>
-            <td>改进拍照测肤SDK架构，并集成了人脸遮挡物检测功能</td>
+            <td>1、新增测肤输出参数，包括Location和缺水缺油、敏感、面积占比  2、新增遮挡物检测功能，改进SDK架构，优化性能 </td>
         </tr>
     </tbody>
 </table>
@@ -45,21 +45,16 @@ SDK支持 iOS 9.0 以上设备，请保持Xcode开发工具升级到最新版本
 
 >- [x] 肤质分析 SDK 下载  [SLSkinAnalysisQCloud.framework](https://github.com/iCodingBoyy/SLSkinAnalysis.git)
 >- [x] Demo下载 [SLSkinAnalysisDemo](https://github.com/iCodingBoyy/SLSkinAnalysis.git)
->- [x] 腾讯云存储下载 [QCloud](https://github.com/tencentyun/qcloud-sdk-ios/releases)
 
 ### 2、Xcode 集成
 
 1、将`SLSkinAnalysisQCloud.framework` 拖到你的项目中，将 `Embed` 设置为 `Embed & Sign`
 
-2、前往 [ OpenCV ](https://opencv.org/releases/)下载 `opencv2.framework`，选择3.4.x版本即可。
-
-3、前往腾讯云下载 [QCloud](https://github.com/tencentyun/qcloud-sdk-ios/releases) 拖入到工程，你也可以通过`Cocoapods`集成腾讯云`QCloud`，具体见教程 [iOS SDK文档](https://cloud.tencent.com/document/product/436/11280)
-
-4、添加必要的链接库文件，并在 `Other Link Flags` 选项添加 `-ObjC`
+2、添加必要的链接库文件，并在 `Other Link Flags` 选项添加 `-ObjC`
  
  - libc++.tdb
 
-5、在需要使用的地方导入头文件 `#import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>` 即可进入相关开发
+3、在需要使用的地方导入头文件 `#import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>` 即可进入相关开发
 
 
 ---
@@ -419,8 +414,12 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
     }];
 }];
 ```
+--- 
 
 ## 四、肤质分析功能说明
+
+--- 
+
 ### 4.1 能力介绍
 - **性别识别**：识别男女；
 - **肤色识别**：识别肤色，涵盖亮白、红润、自然、小麦、暗哑等肤色；
@@ -435,8 +434,8 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
 - **色素斑检测**：检测色素斑类别、严重程度、脸部位置，涵盖雀斑、黄褐斑、隐藏斑等类别；
 - **眼袋检测**：检测是否有眼袋和严重程度；
 - **敏感检测**：检测敏感类别和严重程度；
-- **油分检测**：检测油分严重程度；
-- **水分检测**：检测缺水类别和严重程度；
+- **油分检测**：检测油分状况，包含油分列表、油分面积、油分面积占比、严重程度；
+- **水分检测**：检测水分状况，包含水分列表、水分面积、水分面积占比、严重程度；
 - **肤质类型检测**：检测肤质类别；
 - **肌龄检测**：检测皮肤年龄；
 - **黑眼圈检测**：检测黑眼圈类别和严重程度；
@@ -444,6 +443,8 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
 - **图片质量检测**：检测图片光照和是否模糊；
 - **人脸姿态检测**：检测人脸姿态角度；
 - **遮挡物检测**：检测人脸遮挡物（帽子、刘海、眼镜、鼻贴、口罩、面膜）；
+
+--- 
 
 ### 4.2 类别描述
 | 属性     | 类别                                                         |
@@ -464,6 +465,8 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
 | 图片质量 | 光照：正常、黑暗、过曝、光照不均匀；模糊：正常、模糊         |
 | 人脸姿态 | Pitch、 Roll、Yaw                                            |
 | 遮挡物  | 帽子、刘海、眼镜、鼻贴、口罩、面膜                                 |
+
+--- 
 
 ### 4.3 注意事项
 **眼型返回值规则**：眼型返回值由 eyelid，narrow，updown 三个值组合而成，如返回值 `"eyelid": 2,"narrow": 2,"updown": 1` 代表丹凤眼，具体计算规则见下表。（**注：**下表的组合值为简写，如 `[1、1、1]` 表示 `"eyelid": 1,"narrow": 1,"updown": 1` ）
@@ -493,6 +496,8 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
     <td><img src="http://htsleep.hetyj.com/FsBA8suPUwcVqwIIoDHhD-HsA06m"/></td>
     </tr>
 </table>
+
+--- 
 
 ### 4.4 结果返回
 <table width="100%" style="border-spacing: 0;  border-collapse: collapse;">
@@ -948,8 +953,56 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
             <td>number</td>
             <td>平面内旋转的角度</td>
         </tr>
+        <tr>
+            <td>moistureOverall</td>
+            <td>Object</td>
+            <td>水分整脸的情况</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>缺水面积</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>缺水面积占比</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1：滋润 2：轻度缺水 3：重度缺水）</td>
+        </tr>
+        <tr>
+            <td>oilOverall</td>
+            <td>Object</td>
+            <td>油分整脸的情况</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>油分面积</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>油分面积占比，ratio对应等级 1：缺油, 2：正常, 3：过多： ratio= [0.0, 2.05, 100.0]</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1：不出油 2：轻度出油 3：重度出油）</td>
+        </tr>
+        <tr>
+            <td>orgimageFaceLocation</td>
+            <td>Array</td>
+            <td>原图人脸坐标[x1,y1,x2,y2,rows,cols],包括左上角和右下角,原图大小（高X宽）</td>
+        </tr>
     </tbody>
 </table>
+
+
+--- 
 
 ### 4.5 错误码
 
