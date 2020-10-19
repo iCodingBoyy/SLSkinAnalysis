@@ -56,7 +56,7 @@
             <td>2020年10月16日</td>
             <td>2.0.0</td>
             <td>马远征</td>
-            <td>1.新增油分整脸情况字段oilOverall；2.新增水分整脸情况字段moistureOverall；3.新增敏感整脸情况字段sensitivityOverall；4.新增对应原图的人脸区域坐标字段orgImageFaceLocation。 </td>
+            <td>1、新增油分整脸情况字段oilOverall；2、新增水分整脸情况字段moistureOverall；3、新增敏感整脸情况字段sensitivityOverall；4、新增对应原图的人脸区域坐标字段orgImageFaceLocation；5.添加人脸遮挡物检测功能。 </td>
         </tr>
     </tbody>
 </table>
@@ -327,8 +327,10 @@ config.minStableFramesToOutputState = 3; // 静音模式最小稳定帧，3此�
 #pragma mark - Delegate
 
 - (nullable SLSAVoiceItem*)getVoiceItemByVideoBufferAnalysisState:(SSVideoBufferAnalysisState)state frontCamera:(BOOL)isFrontCamera {
-    /// 实现非遮挡物状态语音
+    /// 实现自定义语音，当 state == SSVideoBufferAnalysisFaceShelter 时调用下面遮挡物检测语音接口
 }
+
+/// 当SDK支持人脸遮挡物检测功能时此接口会被调用
 - (nullable SLSAVoiceItem*)getVoiceItemByDetectedFaceShelters:(NSArray<SLSAFaceShelterItem*>*)shelters {
     /// 实现遮挡物状态语音
 }
@@ -343,6 +345,25 @@ config.minStableFramesToOutputState = 3; // 静音模式最小稳定帧，3此�
 SLSAVideoBufferAnalysisConfiguration *config = [[SLSAVideoBufferAnalysisConfiguration alloc]init];
 config.minDistance = 0.55;
 config.maxDistance = 0.95;
+SLSAMyCustomVoiceConfiguration *voiceConfig = [[SLSAMyCustomVoiceConfiguration alloc]init];
+_bufferAnalysisEngine = [[SLSAVideoBufferAnalysisEngine alloc]initWithConfiguation:config voiceConfig:voiceConfig];
+```
+
+- 遮挡物检测支持
+
+```objectivec
+
+SLSAVideoBufferAnalysisConfiguration *config = [[SLSAVideoBufferAnalysisConfiguration alloc]init];
+config.minDistance = 0.55;
+config.maxDistance = 0.95;
+// 判断是否支持遮挡物检测功能，
+if (_bufferAnalysisEngine.faceShelterSupported) {
+    // 如果支持遮挡物检测功能，设置`SLSAVideoBufferAnalysisConfiguration`支持遮挡物检测才会起作用
+    config.option = config.option | SSVideoBufferAnalysisFaceShelter;
+}
+else {
+    /// 设置支持遮挡物检测option将不起作用
+}
 SLSAMyCustomVoiceConfiguration *voiceConfig = [[SLSAMyCustomVoiceConfiguration alloc]init];
 _bufferAnalysisEngine = [[SLSAVideoBufferAnalysisEngine alloc]initWithConfiguation:config voiceConfig:voiceConfig];
 ```
@@ -388,6 +409,7 @@ UIImage *originImage = [[UIImage alloc]initWithData:imageData];
 /// 检测拍摄的静态图片的可用性
 SSStillImageAnalysisOptions options = SSStillImageAnalysisNone;
 options = (options | SSStillImageAnalysisFaceFeature);
+/// 支持遮挡物检测功能时此设置有效
 options = (options | SSStillImageAnalysisFaceShelters);
 options = (options | SSStillImageAnalysisAspectRedio);
 options = (options | SSStillImageAnalysisPixels);
@@ -396,6 +418,7 @@ options = (options | SSStillImageAnalysisPixels);
 
 SLSAStillImageAnalysisConfiguration *config = [[SLSAStillImageAnalysisConfiguration alloc]init];
 config.options = options;
+/// 设置你自己的合适阈值
 config.maxPixels = 5000000;
 config.maxImageWidth = 2000;
 config.maxImageHeight = 2500;

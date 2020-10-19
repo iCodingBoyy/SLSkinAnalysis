@@ -8,9 +8,7 @@
 
 <hr>
 
-<p><code>SLSkinAnalysisQCloud</code> 是 <code>HETSkinAnalysisSDK</code> 的升级版本，改进架构并优化了拍照性能和体验，内部集成了 <code>QCloud</code> 云服务`。</p>
-
-
+<p><code>SLSkinAnalysisQCloud</code> 是 <code>HETSkinAnalysisSDK</code> 的升级版本，改进架构并优化了拍照性能和体验，内部集成了 <code>人脸遮挡物检测功能</code>和<code>QCloud</code> 云服务`。</p>
 
 <p><img longdesc="https://img.shields.io/badge/version-2.0.0-brightgreen.svg" alt="版本" title="" type="image/jpeg" src="data:image/jpeg;base64,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" class="">      <img longdesc="https://img.shields.io/badge/platform-iOS%209.0+-orange.svg" alt="Platform" title="" type="image/jpeg" src="data:image/jpeg;base64,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" class="">     <img longdesc="https://img.shields.io/badge/build-passing-red.svg" alt="Build Status" title="" type="image/jpeg" src="data:image/jpeg;base64,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" class=""></p>
 
@@ -62,12 +60,14 @@
             <td>2020年10月16日</td>
             <td>2.0.0</td>
             <td>马远征</td>
-            <td>1.新增油分整脸情况字段oilOverall；2.新增水分整脸情况字段moistureOverall；3.新增敏感整脸情况字段sensitivityOverall；4.新增对应原图的人脸区域坐标字段orgImageFaceLocation。 </td>
+            <td>1、新增油分整脸情况字段oilOverall；2、新增水分整脸情况字段moistureOverall；3、新增敏感整脸情况字段sensitivityOverall；4、新增对应原图的人脸区域坐标字段orgImageFaceLocation；5.添加人脸遮挡物检测功能。 </td>
         </tr>
     </tbody>
 </table>
 
 <hr>
+
+
 
 <h2 id="一平台授权">一、平台授权</h2>
 
@@ -393,8 +393,10 @@
 </div><div class="hljs-line"><span class="hljs-meta">#pragma mark - Delegate</span>
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">- (<span class="hljs-keyword">nullable</span> SLSAVoiceItem*)getVoiceItemByVideoBufferAnalysisState:(SSVideoBufferAnalysisState)state frontCamera:(<span class="hljs-built_in">BOOL</span>)isFrontCamera {
-</div><div class="hljs-line">    <span class="hljs-comment">/// 实现非遮挡物状态语音</span>
+</div><div class="hljs-line">    <span class="hljs-comment">/// 实现自定义语音，当 state == SSVideoBufferAnalysisFaceShelter 时调用下面遮挡物检测语音接口</span>
 </div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">/// 当SDK支持人脸遮挡物检测功能时此接口会被调用</span>
 </div><div class="hljs-line">- (<span class="hljs-keyword">nullable</span> SLSAVoiceItem*)getVoiceItemByDetectedFaceShelters:(<span class="hljs-built_in">NSArray</span>&lt;SLSAFaceShelterItem*&gt;*)shelters {
 </div><div class="hljs-line">    <span class="hljs-comment">/// 实现遮挡物状态语音</span>
 </div><div class="hljs-line">}
@@ -413,6 +415,27 @@
 <pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line">SLSAVideoBufferAnalysisConfiguration *config = [[SLSAVideoBufferAnalysisConfiguration alloc]init];
 </div><div class="hljs-line">config.minDistance = <span class="hljs-number">0.55</span>;
 </div><div class="hljs-line">config.maxDistance = <span class="hljs-number">0.95</span>;
+</div><div class="hljs-line">SLSAMyCustomVoiceConfiguration *voiceConfig = [[SLSAMyCustomVoiceConfiguration alloc]init];
+</div><div class="hljs-line">_bufferAnalysisEngine = [[SLSAVideoBufferAnalysisEngine alloc]initWithConfiguation:config voiceConfig:voiceConfig];
+</div></code></pre>
+
+<ul><li><p>遮挡物检测支持</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><wbr>
+</div><div class="hljs-line">SLSAVideoBufferAnalysisConfiguration *config = [[SLSAVideoBufferAnalysisConfiguration alloc]init];
+</div><div class="hljs-line">config.minDistance = <span class="hljs-number">0.55</span>;
+</div><div class="hljs-line">config.maxDistance = <span class="hljs-number">0.95</span>;
+</div><div class="hljs-line"><span class="hljs-comment">// 判断是否支持遮挡物检测功能，</span>
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> (_bufferAnalysisEngine.faceShelterSupported) {
+</div><div class="hljs-line">    <span class="hljs-comment">// 如果支持遮挡物检测功能，设置`SLSAVideoBufferAnalysisConfiguration`支持遮挡物检测才会起作用</span>
+</div><div class="hljs-line">    config.option = config.option | SSVideoBufferAnalysisFaceShelter;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">else</span> {
+</div><div class="hljs-line">    <span class="hljs-comment">/// 设置支持遮挡物检测option将不起作用</span>
+</div><div class="hljs-line">}
 </div><div class="hljs-line">SLSAMyCustomVoiceConfiguration *voiceConfig = [[SLSAMyCustomVoiceConfiguration alloc]init];
 </div><div class="hljs-line">_bufferAnalysisEngine = [[SLSAVideoBufferAnalysisEngine alloc]initWithConfiguation:config voiceConfig:voiceConfig];
 </div></code></pre>
@@ -464,6 +487,7 @@
 </div><div class="hljs-line"><span class="hljs-comment">/// 检测拍摄的静态图片的可用性</span>
 </div><div class="hljs-line">SSStillImageAnalysisOptions options = SSStillImageAnalysisNone;
 </div><div class="hljs-line">options = (options | SSStillImageAnalysisFaceFeature);
+</div><div class="hljs-line"><span class="hljs-comment">/// 支持遮挡物检测功能时此设置有效</span>
 </div><div class="hljs-line">options = (options | SSStillImageAnalysisFaceShelters);
 </div><div class="hljs-line">options = (options | SSStillImageAnalysisAspectRedio);
 </div><div class="hljs-line">options = (options | SSStillImageAnalysisPixels);
@@ -472,6 +496,7 @@
 </div><div class="hljs-line"><wbr>
 </div><div class="hljs-line">SLSAStillImageAnalysisConfiguration *config = [[SLSAStillImageAnalysisConfiguration alloc]init];
 </div><div class="hljs-line">config.options = options;
+</div><div class="hljs-line"><span class="hljs-comment">/// 设置你自己的合适阈值</span>
 </div><div class="hljs-line">config.maxPixels = <span class="hljs-number">5000000</span>;
 </div><div class="hljs-line">config.maxImageWidth = <span class="hljs-number">2000</span>;
 </div><div class="hljs-line">config.maxImageHeight = <span class="hljs-number">2500</span>;

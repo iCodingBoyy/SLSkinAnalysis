@@ -1,0 +1,6 @@
+module Pods_SLSkinAnalysisDemo {
+  umbrella header "Pods-SLSkinAnalysisDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}
