@@ -1,0 +1,25 @@
+
+workspace 'SLSkinAnalysisDemo.xcworkspace'
+platform :ios, '9.0'
+
+source 'git@e.coding.net:clife-devops/public-repository/ios-clifeSpecs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+#source 'https://gitee.com/mirrors/CocoaPods-Specs.git'
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+            config.build_settings['CLANG_WARN_DOCUMENTATION_COMMENTS'] = 'NO'
+        end
+    end
+end
+
+
+target 'SLSkinAnalysisDemo' do
+    project 'SLSkinAnalysisDemo.xcodeproj'
+    pod 'QMUIKit', '~> 4.1.3'
+    pod 'Masonry', '~> 1.1.0'
+    pod 'YYKit', '~> 1.0.9'
+    pod 'lottie-ios', '~> 2.5.3'
+end
