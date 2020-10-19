@@ -1,0 +1,1690 @@
+<!DOCTYPE html><html><head><title>SLSkinAnalysis V2.0.0 SDK iOS平台接入指南</title><meta charset='utf-8'><link href='https://cdn.maxiang.io/res-min/themes/marxico.css' rel='stylesheet'><style></style></head><body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+
+
+<h1 id="slskinanalysis-v200-sdk-ios平台接入指南">SLSkinAnalysis V2.0.0 SDK iOS平台接入指南</h1>
+
+<hr>
+
+<p><code>SLSkinAnalysis</code> 是 <code>HETSkinAnalysisSDK</code> 的升级版本，改进架构并优化了拍照性能和体验。</p>
+
+<p><img longdesc="https://img.shields.io/badge/version-2.0.0-brightgreen.svg" alt="版本" title="" type="image/jpeg" src="data:image/jpeg;base64,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" class="">      <img longdesc="https://img.shields.io/badge/platform-iOS%209.0+-orange.svg" alt="Platform" title="" type="image/jpeg" src="data:image/jpeg;base64,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" class="">     <img longdesc="https://img.shields.io/badge/build-passing-red.svg" alt="Build Status" title="" type="image/jpeg" src="data:image/jpeg;base64,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" class=""></p>
+
+
+
+<h1 id="变更记录说明">变更记录说明</h1>
+
+<table width="100%" style="border-spacing: 0;  border-collapse: collapse;">
+    <thead>
+        <tr>
+            <td>日期</td>
+            <td>版本号</td>
+            <td>作者</td>
+            <td>描述</td>
+        </tr>
+    </thead>
+    <tbody> 
+        <tr>
+            <td>2020年06月15日</td>
+            <td>1.0.6</td>
+            <td>马远征</td>
+            <td>1、增加了鱼尾纹维度；2、增加了算法超时错误码</td>
+        </tr>
+        <tr>
+            <td>2020年07月16日</td>
+            <td>1.0.7</td>
+            <td>李孝宇</td>
+            <td>1、增加了遮挡物字段（faceShelter）；2、增加了测肤记录ID(photographId)</td>
+        </tr>
+        <tr>
+            <td>2020年07月23日</td>
+            <td>1.0.8</td>
+            <td>李孝宇</td>
+            <td>1、测肤记录ID字段photographId改为String类型</td>
+        </tr>
+        <tr>
+            <td>2020年08月20日</td>
+            <td>1.0.9</td>
+            <td>李孝宇</td>
+            <td>1、增加了眉间纹；2、细纹 Wrinkles 下增加面积字段</td>
+        </tr>
+        <tr>
+            <td>2020年09月24日</td>
+            <td>1.1.0</td>
+            <td>马远征</td>
+            <td>1、增加文案、icon、蒙版、可视化图片输出</td>
+        </tr>
+        <tr>
+            <td>2020年10月16日</td>
+            <td>2.0.0</td>
+            <td>马远征</td>
+            <td>1.新增油分整脸情况字段oilOverall；2.新增水分整脸情况字段moistureOverall；3.新增敏感整脸情况字段sensitivityOverall；4.新增对应原图的人脸区域坐标字段orgImageFaceLocation。 </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+
+
+<h2 id="一平台授权">一、平台授权</h2>
+
+<p><code>SDK</code> 需要配置相应的 <code>AppId</code> 和 <code>AppSecret</code> ，请联系相关客服人员获取。</p>
+
+<hr>
+
+
+
+<h2 id="二快速集成">二、快速集成</h2>
+
+<p>SDK支持 iOS 9.0 以上设备，请保持Xcode开发工具升级到最新版本。</p>
+
+<p>1、将 <code>SLSkinAnalysis.framework</code> 拖到你的项目中，将 <code>Embed</code> 设置为 <code>Embed &amp; Sign</code></p>
+
+<p>2、添加必要的链接库文件，并在 <code>Other Link Flags</code> 选项添加 <code>-ObjC</code></p>
+
+<ul><li><p>libc++.tdb</p></li>
+</ul>
+
+<p>3、在需要使用的地方导入头文件 <code>#import &lt;SLSkinAnalysis/SLSkinAnalysis.h&gt;</code> 即可进入相关开发</p>
+
+<hr>
+
+
+
+<h2 id="三接入指南">三、接入指南</h2>
+
+<p>在调用相关接口前请先下载<code>SDK</code>和<code>Demo</code>，熟悉接口和调用逻辑。</p>
+
+
+
+<h3 id="31注册-appid-和-appsecret">3.1、注册 AppId 和 AppSecret</h3>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-comment">// 优先导入头文件</span>
+</div><div class="hljs-line"><span class="hljs-meta">#import <span class="hljs-meta-string">&lt;SLSkinAnalysis/SLSkinAnalysis.h&gt;</span></span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">// 注册</span>
+</div><div class="hljs-line">SLSARegister(<span class="hljs-string">@"31298"</span>, <span class="hljs-string">@"145a2540f00147e89dc5e33b6842f74c"</span>);
+</div></code></pre>
+
+
+
+<h3 id="32-相机调用">3.2 相机调用</h3>
+
+<p>在项目工程 <code>Info.plist</code> 中添加 <code>Privacy - Camera Usage Description</code> 隐私描述 如：<code>App拍照测肤需要调用您的相机</code></p>
+
+
+
+<h4 id="321-访问授权">3.2.1 访问授权</h4>
+
+<p>在调用相机拍摄前需要优先判断是否拥有相机访问许可，如果未授权需要请求授权访问。</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-built_in">AVAuthorizationStatus</span> status = [<span class="hljs-built_in">AVCaptureDevice</span> authorizationStatusForMediaType:<span class="hljs-built_in">AVMediaTypeVideo</span>];
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> (status == <span class="hljs-built_in">AVAuthorizationStatusAuthorized</span>) {
+</div><div class="hljs-line">    <span class="hljs-comment">// 初始化相机</span>
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line">@weakify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">[<span class="hljs-built_in">AVCaptureDevice</span> requestAccessForMediaType:<span class="hljs-built_in">AVMediaTypeVideo</span> completionHandler:^(<span class="hljs-built_in">BOOL</span> granted) {
+</div><div class="hljs-line">    SLSAAsyncMain(^{
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span> (granted) {
+</div><div class="hljs-line">            <span class="hljs-comment">// 初始化相机</span>
+</div><div class="hljs-line">            <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-comment">// 无相机访问许可，做对应的处理</span>
+</div><div class="hljs-line">        [<span class="hljs-keyword">self</span> showAlert:<span class="hljs-string">@"无相机访问许可，请更改隐私设置允许访问相机"</span> doneHandler:^{
+</div><div class="hljs-line">            @strongify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">            [<span class="hljs-keyword">self</span>.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
+</div><div class="hljs-line">        }];
+</div><div class="hljs-line">    });
+</div><div class="hljs-line">}];
+</div></code></pre>
+
+
+
+<h4 id="322-相机初始化">3.2.2 相机初始化</h4>
+
+<p>拥有相机访问权限后，可按如下方式初始化相机</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-built_in">NSError</span> *error;
+</div><div class="hljs-line">_camera = [[SLSACamera alloc]init];
+</div><div class="hljs-line">_camera.delegate = <span class="hljs-keyword">self</span>;
+</div><div class="hljs-line"><span class="hljs-built_in">BOOL</span> ret = [_camera prepareCamera:<span class="hljs-built_in">AVCaptureDevicePositionFront</span> error:&amp;error];
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> (!ret) {
+</div><div class="hljs-line">    <span class="hljs-comment">// 相机初始化失败，做失败处理</span>
+</div><div class="hljs-line">    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"---相机设备初始化失败--%@"</span>,error);
+</div><div class="hljs-line">    @weakify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">    [<span class="hljs-keyword">self</span> showAlert:<span class="hljs-string">@"相机初始化出错"</span> doneHandler:^{
+</div><div class="hljs-line">        @strongify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">        [<span class="hljs-keyword">self</span>.navigationController popViewControllerAnimated:<span class="hljs-literal">YES</span>];
+</div><div class="hljs-line">    }];
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-comment">/// 调用处理，如插入layer图层并启动相机视频帧采集</span>
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> (_camera.prepared) {
+</div><div class="hljs-line">    _camera.videoPreviewLayer.frame = <span class="hljs-keyword">self</span>.view.bounds;
+</div><div class="hljs-line">}
+</div><div class="hljs-line">[<span class="hljs-keyword">self</span>.view.layer insertSublayer:_camera.videoPreviewLayer atIndex:<span class="hljs-number">0</span>];
+</div><div class="hljs-line">[_camera startRunning];
+</div></code></pre>
+
+
+
+<h4 id="323-videopreviewlayer-设置">3.2.3 videoPreviewLayer 设置</h4>
+
+<p><code>AVCaptureVideoPreviewLayer</code> 提供了相机画面的异步渲染，如果不需要自行渲染相机数据，可以调用它。</p>
+
+<ul><li><p>将相机预览图层插入视图图层索引0位置</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line">[<span class="hljs-keyword">self</span>.view.layer insertSublayer:_camera.videoPreviewLayer atIndex:<span class="hljs-number">0</span>];
+</div><div class="hljs-line">_camera.videoPreviewLayer.frame = <span class="hljs-keyword">self</span>.view.bounds;
+</div></code></pre>
+
+<ul><li><p>调整预览图层的 frame </p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line">- (<span class="hljs-keyword">void</span>)viewWillLayoutSubviews {
+</div><div class="hljs-line">    [<span class="hljs-keyword">super</span> viewWillLayoutSubviews];
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">self</span>.camera &amp;&amp; <span class="hljs-keyword">self</span>.camera.prepared) {
+</div><div class="hljs-line">        <span class="hljs-keyword">self</span>.camera.videoPreviewLayer.frame = <span class="hljs-keyword">self</span>.view.bounds;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">- (<span class="hljs-keyword">void</span>)viewDidLayoutSubviews {
+</div><div class="hljs-line">    [<span class="hljs-keyword">super</span> viewDidLayoutSubviews];
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">self</span>.camera &amp;&amp; <span class="hljs-keyword">self</span>.camera.prepared) {
+</div><div class="hljs-line">        <span class="hljs-keyword">self</span>.camera.videoPreviewLayer.frame = <span class="hljs-keyword">self</span>.view.bounds;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h4 id="324-运行控制">3.2.4 运行控制</h4>
+
+<ul><li><p>判断相机是否正在采集视频帧</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-built_in">BOOL</span> ret = [<span class="hljs-keyword">self</span>.camera isRunning];
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> (ret) {
+</div><div class="hljs-line">    <span class="hljs-comment">/// 相机正在运行</span>
+</div><div class="hljs-line">}
+</div></code></pre>
+
+<ul><li><p>启动相机视频帧录制</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-comment">/// 异步启动相机</span>
+</div><div class="hljs-line">[<span class="hljs-keyword">self</span>.camera startRunning];
+</div><div class="hljs-line"><span class="hljs-comment">/// 同步启动相机</span>
+</div><div class="hljs-line">[<span class="hljs-keyword">self</span>.camera startRunning:<span class="hljs-literal">NO</span>];
+</div></code></pre>
+
+<ul><li><p>停止视频帧录制</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-comment">/// 异步停止相机拍摄</span>
+</div><div class="hljs-line">[<span class="hljs-keyword">self</span>.camera stopRunning];
+</div></code></pre>
+
+
+
+<h4 id="325-摄像头切换">3.2.5 摄像头切换</h4>
+
+<ul><li><p>判断是否是后置摄像头</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-comment">/// 异步停止相机拍摄</span>
+</div><div class="hljs-line"><span class="hljs-built_in">BOOL</span> ret = [<span class="hljs-keyword">self</span>.camera isCameraPositionBack];
+</div></code></pre>
+
+<ul><li><p>获取摄像头位置</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-built_in">AVCaptureDevicePosition</span> position = [<span class="hljs-keyword">self</span>.camera getCameraPosition];
+</div></code></pre>
+
+<ul><li><p>异步切换摄像头</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-comment">/// 相机正在拍照，不执行切换</span>
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> ([<span class="hljs-keyword">self</span>.camera isCapturingStillImage]) {
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-comment">// 获取当前摄像头方向并设置相反的切换方向</span>
+</div><div class="hljs-line"><span class="hljs-built_in">AVCaptureDevicePosition</span> devicePosition = [<span class="hljs-keyword">self</span>.camera getCameraPosition];
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> (devicePosition == <span class="hljs-built_in">AVCaptureDevicePositionBack</span>) {
+</div><div class="hljs-line">    devicePosition = <span class="hljs-built_in">AVCaptureDevicePositionFront</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">else</span> {
+</div><div class="hljs-line">    devicePosition = <span class="hljs-built_in">AVCaptureDevicePositionBack</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-comment">/// 切换摄像头</span>
+</div><div class="hljs-line">@weakify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">[<span class="hljs-keyword">self</span>.camera setCameraPosition:devicePosition result:^(<span class="hljs-built_in">AVCaptureDevicePosition</span> position) {
+</div><div class="hljs-line">    @strongify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">    <span class="hljs-comment">/// 得到摄像头切换的方向 position 做对应的处理 </span>
+</div><div class="hljs-line">    <span class="hljs-built_in">BOOL</span> isFrontCamera = [<span class="hljs-keyword">self</span>.camera isCameraPositionBack];
+</div><div class="hljs-line">    <span class="hljs-keyword">self</span>.voiceTextLabel.text = isFrontCamera ? <span class="hljs-string">@"请平视前置摄像头"</span> : <span class="hljs-string">@"请平视后置摄像头"</span>;
+</div><div class="hljs-line">    <span class="hljs-keyword">self</span>.switchButton.selected = (position == <span class="hljs-built_in">AVCaptureDevicePositionBack</span>);
+</div><div class="hljs-line">}];
+</div></code></pre>
+
+
+
+<h4 id="326-静态图片采集">3.2.6 静态图片采集</h4>
+
+<p>调用如下接口进行静态图片拍摄</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-comment">/// 正在拍照</span>
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> ([<span class="hljs-keyword">self</span>.camera isCapturingStillImage]) {
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line">@weakify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">[<span class="hljs-keyword">self</span>.camera takePhotosAsynchronously:^(<span class="hljs-built_in">CMSampleBufferRef</span>  _Nonnull imageDataSampleBuffer, <span class="hljs-built_in">NSError</span> * _Nonnull error) {
+</div><div class="hljs-line">    <span class="hljs-comment">/// 拍照结果buffer回调</span>
+</div><div class="hljs-line">    @strongify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">    SLSAAsyncMain(^{
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">    });
+</div><div class="hljs-line">} result:^(<span class="hljs-built_in">NSData</span> * _Nonnull imageData, <span class="hljs-built_in">NSError</span> * _Nonnull error) {
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span> (error) {
+</div><div class="hljs-line">    <span class="hljs-comment">/// 拍照错误</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-comment">/// 得到原始图像进行处理</span>
+</div><div class="hljs-line">    <span class="hljs-built_in">UIImage</span> *originImage = [[<span class="hljs-built_in">UIImage</span> alloc]initWithData:imageData];
+</div><div class="hljs-line">}];
+</div></code></pre>
+
+
+
+<h4 id="327-清理资源">3.2.7 清理资源</h4>
+
+<p>使用完毕释放资源</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line">- (<span class="hljs-keyword">void</span>)dealloc {
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span> (_camera) {
+</div><div class="hljs-line">        [_camera clear];
+</div><div class="hljs-line">        _camera = <span class="hljs-literal">nil</span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h3 id="33-buffer-处理">3.3 buffer 处理</h3>
+
+<p><code>SLSAVideoBufferAnalysisEngine</code>分析引擎用于辅助拍摄符合要求的清晰人脸图像，通过此引擎可以控制拍摄距离、光亮、人脸在屏幕位置、识别人脸遮挡物等。</p>
+
+
+
+<h4 id="331-configure">3.3.1 configure</h4>
+
+<p><code>SLSAVideoBufferAnalysisConfiguration</code>允许你设置buffer分析阈值，如：光亮、距离、分析选项、稳定帧等</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line">SLSAVideoBufferAnalysisConfiguration *config = [[SLSAVideoBufferAnalysisConfiguration alloc]init];
+</div><div class="hljs-line">config.minDistance = <span class="hljs-number">0.55</span>; <span class="hljs-comment">// 最小相对距离</span>
+</div><div class="hljs-line">config.maxDistance = <span class="hljs-number">0.95</span>; <span class="hljs-comment">// 最大相对距离</span>
+</div><div class="hljs-line">config.minYUVLight = <span class="hljs-number">60</span>; <span class="hljs-comment">// 最小亮度</span>
+</div><div class="hljs-line">config.maxYUVLight = <span class="hljs-number">220</span>; <span class="hljs-comment">// 最大亮度</span>
+</div><div class="hljs-line">config.options = SSVideoBufferAnalysisAll;<span class="hljs-comment">// 检测所有选项</span>
+</div><div class="hljs-line">config.minStableFramesToCaptureStillImage = <span class="hljs-number">3</span>；<span class="hljs-comment">// 最小拍照稳定帧，3次满足拍照要求输出拍照状态</span>
+</div><div class="hljs-line">config.minStableFramesToOutputState = <span class="hljs-number">3</span>; <span class="hljs-comment">// 静音模式最小稳定帧，3此满足输出当前状态</span>
+</div></code></pre>
+
+
+
+<h4 id="332-自定义语音">3.3.2 自定义语音</h4>
+
+<p><code>buffer</code>分析引擎提供了默认的语音<code>SLSADefaultVoiceConfiguration</code>,如果需要自定义声音，实现<code>SLSAVoiceConfigDelegate</code>协议即可</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">SLSAMyCustomVoiceConfiguration</span> : <span class="hljs-title">NSObject</span> &lt;<span class="hljs-title">SLSAVoiceConfigDelegate</span>&gt;</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-keyword">@end</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">SLSAMyCustomVoiceConfiguration</span></span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-meta">#pragma mark - Delegate</span>
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">- (<span class="hljs-keyword">nullable</span> SLSAVoiceItem*)getVoiceItemByVideoBufferAnalysisState:(SSVideoBufferAnalysisState)state frontCamera:(<span class="hljs-built_in">BOOL</span>)isFrontCamera {
+</div><div class="hljs-line">    <span class="hljs-comment">/// state == SSVideoBufferAnalysisStateFaceShelter 时不走此接口</span>
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">/// 当SDK支持人脸遮挡物检测时此接口有效</span>
+</div><div class="hljs-line">- (<span class="hljs-keyword">nullable</span> SLSAVoiceItem*)getVoiceItemByDetectedFaceShelters:(<span class="hljs-built_in">NSArray</span>&lt;SLSAFaceShelterItem*&gt;*)shelters {
+</div><div class="hljs-line">    <span class="hljs-comment">/// 实现遮挡物状态语音</span>
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-keyword">@end</span>
+</div></code></pre>
+
+
+
+<h4 id="333-人脸状态检测">3.3.3 人脸状态检测</h4>
+
+<ul><li><p>初始化 buffer 分析引擎</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line">SLSAVideoBufferAnalysisConfiguration *config = [[SLSAVideoBufferAnalysisConfiguration alloc]init];
+</div><div class="hljs-line">config.minDistance = <span class="hljs-number">0.55</span>;
+</div><div class="hljs-line">config.maxDistance = <span class="hljs-number">0.95</span>;
+</div><div class="hljs-line">SLSAMyCustomVoiceConfiguration *voiceConfig = [[SLSAMyCustomVoiceConfiguration alloc]init];
+</div><div class="hljs-line">_bufferAnalysisEngine = [[SLSAVideoBufferAnalysisEngine alloc]initWithConfiguation:config voiceConfig:voiceConfig];
+</div></code></pre>
+
+<ul><li><p>buffer分析</p></li>
+</ul>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line">- (<span class="hljs-keyword">void</span>)captureOutput:(<span class="hljs-built_in">AVCaptureOutput</span> *)output didOutputSampleBuffer:(<span class="hljs-built_in">CMSampleBufferRef</span>)sampleBuffer faceObjects:(<span class="hljs-built_in">NSArray</span> *)faceObjects fromConnection:(<span class="hljs-built_in">AVCaptureConnection</span> *)connection {
+</div><div class="hljs-line">    <span class="hljs-built_in">AVCaptureDevicePosition</span> position = [<span class="hljs-keyword">self</span>.camera getCameraPosition];
+</div><div class="hljs-line">    [<span class="hljs-keyword">self</span>.bufferAnalysisEngine analysisVideoBuffer:sampleBuffer position:position faces:faceInfoArray renderRect:<span class="hljs-keyword">self</span>.renderRect boundingRect:<span class="hljs-keyword">self</span>.renderRect targetFace:^(<span class="hljs-built_in">CGRect</span> faceRect) {
+</div><div class="hljs-line">        <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"--人脸框--%@"</span>,<span class="hljs-built_in">NSStringFromCGRect</span>(faceRect));
+</div><div class="hljs-line">        SLSAAsyncMain(^{
+</div><div class="hljs-line">            @strongify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">            [<span class="hljs-keyword">self</span>.faceRectDraw drawFaceRect:faceRect];
+</div><div class="hljs-line">        });
+</div><div class="hljs-line">    } result:^(SLSAVideoBufferAnalysisResult * _Nonnull result) {
+</div><div class="hljs-line">        <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"--result--%@"</span>,result);
+</div><div class="hljs-line">        @strongify(<span class="hljs-keyword">self</span>);
+</div><div class="hljs-line">        <span class="hljs-comment">/// 处理人脸状态</span>
+</div><div class="hljs-line">        <span class="hljs-comment">/// code</span>
+</div><div class="hljs-line">        <span class="hljs-keyword">if</span> (result.state == SSVideoBufferAnalysisStateWillTakePhoto) {
+</div><div class="hljs-line">            <span class="hljs-built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{
+</div><div class="hljs-line">                [<span class="hljs-keyword">self</span> performSelector:<span class="hljs-keyword">@selector</span>(prepareToTakePhoto) withObject:<span class="hljs-literal">nil</span> afterDelay:<span class="hljs-number">3.0</span>];
+</div><div class="hljs-line">            });
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">        <span class="hljs-keyword">else</span> {
+</div><div class="hljs-line">            <span class="hljs-built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{
+</div><div class="hljs-line">              <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"取消拍照"</span>);
+</div><div class="hljs-line">             [<span class="hljs-built_in">NSObject</span> cancelPreviousPerformRequestsWithTarget:<span class="hljs-keyword">self</span> selector:<span class="hljs-keyword">@selector</span>(prepareToTakePhoto) object:<span class="hljs-literal">nil</span>];
+</div><div class="hljs-line">            });
+</div><div class="hljs-line">        }
+</div><div class="hljs-line">    }];
+</div><div class="hljs-line">}
+</div></code></pre>
+
+
+
+<h3 id="34-静态图片检测">3.4 静态图片检测</h3>
+
+<p>可使用静态图片检测接口识别图片是否符合大数据肤质分析要求，如果不做处理且不满足要求，后台算法服务器会返回对应的错误</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line"><span class="hljs-comment">/// 你的检测图像</span>
+</div><div class="hljs-line"><span class="hljs-built_in">UIImage</span> *originImage = [[<span class="hljs-built_in">UIImage</span> alloc]initWithData:imageData];
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line"><span class="hljs-comment">/// 检测拍摄的静态图片的可用性</span>
+</div><div class="hljs-line">SSStillImageAnalysisOptions options = SSStillImageAnalysisNone;
+</div><div class="hljs-line">options = (options | SSStillImageAnalysisFaceFeature);
+</div><div class="hljs-line">options = (options | SSStillImageAnalysisFaceShelters);
+</div><div class="hljs-line">options = (options | SSStillImageAnalysisAspectRedio);
+</div><div class="hljs-line">options = (options | SSStillImageAnalysisPixels);
+</div><div class="hljs-line">options = (options | SSStillImageAnalysisSize);
+</div><div class="hljs-line">options = (options | SSStillImageAnalysisPixels);
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">SLSAStillImageAnalysisConfiguration *config = [[SLSAStillImageAnalysisConfiguration alloc]init];
+</div><div class="hljs-line">config.options = options;
+</div><div class="hljs-line">config.maxPixels = <span class="hljs-number">5000000</span>;
+</div><div class="hljs-line">config.maxImageWidth = <span class="hljs-number">2000</span>;
+</div><div class="hljs-line">config.maxImageHeight = <span class="hljs-number">2500</span>;
+</div><div class="hljs-line"><wbr>
+</div><div class="hljs-line">SLSAStillImageAnalysisEngine *engine = [[SLSAStillImageAnalysisEngine alloc]initWithConfiguration:config];
+</div><div class="hljs-line"><span class="hljs-built_in">NSError</span> *stillImageError;
+</div><div class="hljs-line"><span class="hljs-keyword">if</span> (![engine isValidStillImage:originImage error:&amp;stillImageError]) {
+</div><div class="hljs-line">    [QMUITips showError:stillImageError.localizedDescription];
+</div><div class="hljs-line">    <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><span class="hljs-comment">/// 上传分析</span>
+</div></code></pre>
+
+
+
+<h3 id="35-肤质分析">3.5 肤质分析</h3>
+
+<p>采集到符合要求的正面清晰人脸照片后可调用以下接口进行上传和分析</p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="language-objectivec hljs"><div class="hljs-line">[QMUITips showLoading:<span class="hljs-string">@"图片上传中"</span> inView:<span class="hljs-keyword">self</span>.view];
+</div><div class="hljs-line">_dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
+</div><div class="hljs-line"><span class="hljs-comment">/// 肤质分析</span>
+</div><div class="hljs-line">[<span class="hljs-keyword">self</span>.dataEngine analysisWithImageURL:imageURL result:^(<span class="hljs-built_in">NSDictionary</span> * _Nonnull responseJSON, <span class="hljs-built_in">NSError</span> * _Nonnull error) {
+</div><div class="hljs-line">    [QMUITips hideAllTips];
+</div><div class="hljs-line">    <span class="hljs-keyword">if</span> (error) {
+</div><div class="hljs-line">        <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"----error----%@"</span>,error);
+</div><div class="hljs-line">        [QMUITips showError:error.localizedDescription];
+</div><div class="hljs-line">        <span class="hljs-keyword">return</span>;
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">    <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"----responseJSON----%@"</span>,responseJSON);
+</div><div class="hljs-line">    [QMUITips showSucceed:<span class="hljs-string">@"肤质信息分析成功"</span>];
+</div><div class="hljs-line">}];
+</div></code></pre>
+
+<hr>
+
+<h2 id="四肤质分析功能说明">四、肤质分析功能说明</h2>
+
+<hr>
+
+
+
+<h3 id="41-能力介绍">4.1 能力介绍</h3>
+
+<ul><li><p><strong>性别识别</strong>：识别男女；</p></li>
+<li><p><strong>肤色识别</strong>：识别肤色，涵盖亮白、红润、自然、小麦、暗哑等肤色；</p></li>
+<li><p><strong>脸型识别</strong>：识别脸型类别，涵盖圆脸、鹅蛋脸、心形脸、方脸等脸型；</p></li>
+<li><p><strong>黑头识别</strong>：检测黑头个数和严重程度；</p></li>
+<li><p><strong>毛孔检测</strong>：检测毛孔个数和严重程度；</p></li>
+<li><p><strong>痘痘检测</strong>：检测痘痘类别、个数、严重程度、脸部位置，涵盖痘后红斑、凹陷瘢痕、脓包、结节囊肿等类别；</p></li>
+<li><p><strong>眼型识别</strong>：识别眼型类别，涵盖杏眼、丹凤眼、桃花眼等眼型；</p></li>
+<li><p><strong>眉形识别</strong>：识别左右眉形类别，涵盖双燕眉、平直眉、秋波眉等眉形；</p></li>
+<li><p><strong>卧蚕识别</strong>：识别是否有卧蚕；</p></li>
+<li><p><strong>细纹检测</strong>：检测细纹类别和严重程度，涵盖抬头纹、法令纹、泪沟、笑肌断层、鱼尾纹等类别；</p></li>
+<li><p><strong>色素斑检测</strong>：检测色素斑类别、严重程度、脸部位置，涵盖雀斑、黄褐斑、隐藏斑等类别；</p></li>
+<li><p><strong>眼袋检测</strong>：检测是否有眼袋和严重程度；</p></li>
+<li><p><strong>敏感检测</strong>：检测敏感类别和严重程度；</p></li>
+<li><p><strong>油分检测</strong>：检测油分状况，包含油分列表、油分面积、油分面积占比、严重程度；</p></li>
+<li><p><strong>水分检测</strong>：检测水分状况，包含水分列表、水分面积、水分面积占比、严重程度；</p></li>
+<li><p><strong>肤质类型检测</strong>：检测肤质类别；</p></li>
+<li><p><strong>肌龄检测</strong>：检测皮肤年龄；</p></li>
+<li><p><strong>黑眼圈检测</strong>：检测黑眼圈类别和严重程度；</p></li>
+<li><p><strong>脂肪粒检测</strong>：检测缺水类别和严重程度；</p></li>
+<li><p><strong>图片质量检测</strong>：检测图片光照和是否模糊；</p></li>
+<li><p><strong>人脸姿态检测</strong>：检测人脸姿态角度；</p></li>
+<li><p><strong>遮挡物检测</strong>：检测人脸遮挡物（帽子、刘海、眼镜、鼻贴、口罩、面膜）；</p></li>
+<li><p><strong>相似明星脸检测</strong>：检测相似明星脸：明星名称、相似度、明星图片；</p></li>
+</ul>
+
+<hr>
+
+
+
+<h3 id="42-类别描述">4.2 类别描述</h3>
+
+<table><tbody><tr style="font-weight:bold">  <td align="left">属性</td>  <td align="left">类别</td></tr><tr>  <td align="left">性别</td>  <td align="left">男、女</td></tr><tr>  <td align="left">肤色</td>  <td align="left">黝黑、暗哑、小麦、自然、红润、亮白</td></tr><tr>  <td align="left">脸型</td>  <td align="left">方脸、圆脸、鹅蛋脸、心形脸</td></tr><tr>  <td align="left">痘痘</td>  <td align="left">凹陷瘢痕、痘后红斑、粉刺、炎症丘疹、结节囊肿、脓包</td></tr><tr>  <td align="left">眼型</td>  <td align="left">杏眼、小鹿眼、铜铃眼、睡龙眼、丹凤眼、瑞凤眼、睡凤眼、月牙眼、桃花眼、柳叶眼、狐媚眼、孔雀眼</td></tr><tr>  <td align="left">眉形</td>  <td align="left">柳叶眉、平直眉、秋波眉、秋娘眉、双燕眉、水弯眉</td></tr><tr>  <td align="left">细纹</td>  <td align="left">抬头纹、法令纹、泪沟、笑肌断层</td></tr><tr>  <td align="left">色素斑</td>  <td align="left">黄褐斑、雀斑、隐藏斑、黑痣</td></tr><tr>  <td align="left">敏感</td>  <td align="left">耐受、敏感</td></tr><tr>  <td align="left">水分</td>  <td align="left">滋润、敏感性缺水、油脂性缺水、老化性缺水</td></tr><tr>  <td align="left">肤质类型</td>  <td align="left">干性、中性偏干、中性、混合性偏干、混合性、混合性偏油、油性</td></tr><tr>  <td align="left">黑眼圈</td>  <td align="left">正常、血管型、色素型</td></tr><tr>  <td align="left">脂肪粒</td>  <td align="left">栗丘疹</td></tr><tr>  <td align="left">图片质量</td>  <td align="left">光照：正常、黑暗、过曝、光照不均匀；模糊：正常、模糊</td></tr><tr>  <td align="left">人脸姿态</td>  <td align="left">Pitch、 Roll、Yaw</td></tr><tr>  <td align="left">遮挡物</td>  <td align="left">帽子、刘海、眼镜、鼻贴、口罩、面膜</td></tr></tbody></table>
+
+<hr>
+
+
+
+<h3 id="43-注意事项">4.3 注意事项</h3>
+
+<p><strong>眼型返回值规则</strong>：眼型返回值由 eyelid，narrow，updown 三个值组合而成，如返回值 <code>"eyelid": 2,"narrow": 2,"updown": 1</code> 代表丹凤眼，具体计算规则见下表。（<strong>注：</strong>下表的组合值为简写，如 <code>[1、1、1]</code> 表示 <code>"eyelid": 1,"narrow": 1,"updown": 1</code> ）</p>
+
+<table><tbody><tr style="font-weight:bold">  <td>组合值</td>  <td>代表眼型</td></tr><tr>  <td>[1、1、1]</td>  <td>铜铃眼</td></tr><tr>  <td>[1、1、2]</td>  <td>睡龙眼</td></tr><tr>  <td>[2、1、1]</td>  <td>杏眼</td></tr><tr>  <td>[2、1、2]</td>  <td>小鹿眼</td></tr><tr>  <td>[2、2、1]</td>  <td>丹凤眼</td></tr><tr>  <td>[2、2、2]</td>  <td>睡凤眼</td></tr><tr>  <td>[1、2、1]</td>  <td>瑞凤眼</td></tr><tr>  <td>[1、2、2]</td>  <td>月牙眼</td></tr><tr>  <td>[2、3、1]</td>  <td>桃花眼</td></tr><tr>  <td>[2、3、2]</td>  <td>柳叶眼</td></tr><tr>  <td>[1、3、1]</td>  <td>狐媚眼</td></tr><tr>  <td>[1、3、2]</td>  <td>孔雀眼</td></tr></tbody></table>
+
+<p><strong>肤色返回值规则</strong>：肤色返回值由肤色卡行列组合而成，如返回值 F_3 代表第 F 行第 3 列的肤色块，肤色卡见下表。</p>
+
+<table>
+    <tbody><tr align="center">
+    <td>肤色卡</td>
+    </tr>
+    <tr align="center">
+    <td><img longdesc="http://htsleep.hetyj.com/FsBA8suPUwcVqwIIoDHhD-HsA06m" type="image/jpeg" src="data:image/jpeg;base64,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" class="" alt=""></td>
+    </tr>
+</tbody></table>
+
+<hr>
+
+
+
+<h2 id="结果返回">结果返回</h2>
+
+<table width="100%" style="border-spacing: 0;  border-collapse: collapse;">
+    <thead>
+        <tr>
+            <td>名称</td>
+            <td>数据类型</td>
+            <td>说明</td>
+        </tr>
+    </thead>
+    <tbody> 
+        <tr>
+            <td>blackHead</td>
+            <td>object</td>
+            <td>黑头</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-无，2-极少，3-轻度，4-中度，5-重度）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;number</td>
+            <td>number</td>
+            <td>黑头数量</td>
+        </tr>
+        <tr>
+             <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+             <td>String</td>
+             <td>黑头图层图片</td>
+        </tr>
+        <tr>
+            <td>pore</td>
+            <td>object</td>
+            <td>毛孔</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-紧致，2-轻度，3-中度，4-重度）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;number</td>
+            <td>number</td>
+            <td>毛孔数量</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>毛孔图层图片</td>
+        </tr><tr>
+            <td>facecolor</td>
+            <td>String</td>
+            <td>肤色（F_3 代表第F行第3列的肤色块)</td>
+        </tr>
+        <tr>
+            <td>faceshape</td>
+            <td>String</td>
+            <td>脸型（H-心形脸，O-鹅蛋脸, S-方脸, R-圆脸）</td>
+        </tr>
+        <tr>
+            <td>acnes</td>
+            <td>list</td>
+            <td>痘痘列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;acneTypeId</td>
+            <td>number</td>
+            <td>痘痘类型（1-红斑，2-粉刺，3-炎症性丘疹，4-脓包，5-凹陷性瘢痕，6-结节）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-无，2-轻度，3-中度，4-重度）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;number</td>
+            <td>number</td>
+            <td>痘痘数量</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;facePart</td>
+            <td>number</td>
+            <td>部位（0-脸部无痘痘，1-额头，2-鼻子，3-左脸，4-右脸，5-下颌）</td>
+        </tr>
+        <tr>
+            <td>eyeshape</td>
+            <td>object</td>
+            <td>眼型</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;eyelid</td>
+            <td>number</td>
+            <td>单双眼皮（1-单眼皮，2-双眼皮）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;narrow</td>
+            <td>number</td>
+            <td>眼睛宽窄（1-大眼，2-正常眼，3-眯缝眼）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;updown</td>
+            <td>number</td>
+            <td>外眼角的上扬或下垂（1-上扬，2-下垂）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[1、1、1]</td>
+            <td></td>
+            <td>铜铃眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[1、1、2]</td>
+            <td></td>
+            <td>睡龙眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[2、1、1]</td>
+            <td></td>
+            <td>杏眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[2、1、2]</td>
+            <td></td>
+            <td>小鹿眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[2、2、1]</td>
+            <td></td>
+            <td>丹凤眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[2、2、2]</td>
+            <td></td>
+            <td>睡凤眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[1、2、1]</td>
+            <td></td>
+            <td>瑞凤眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[1、2、2]</td>
+            <td></td>
+            <td>月牙眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[2、3、1]</td>
+            <td></td>
+            <td>桃花眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[2、3、2]</td>
+            <td></td>
+            <td>柳叶眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[1、3、1]</td>
+            <td></td>
+            <td>狐媚眼</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;[1、3、2]</td>
+            <td></td>
+            <td>孔雀眼</td>
+        </tr>
+        <tr>
+            <td>eyebrow</td>
+            <td>object</td>
+            <td>眉形</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;left</td>
+            <td>number</td>
+            <td>左眼眉形（1、柳叶眉，2-平直眉，3-秋波眉，4-秋娘眉，5-双燕眉，6-水弯眉）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;right</td>
+            <td>number</td>
+            <td>右眼眉形（1、柳叶眉，2-平直眉，3-秋波眉，4-秋娘眉，5-双燕眉，6-水弯眉）</td>
+        </tr>
+        <tr>
+            <td>pouch</td>
+            <td>object</td>
+            <td>眼袋</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;exist</td>
+            <td>number</td>
+            <td>有无眼袋（1-无眼袋，2-有眼袋）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重程度（1-无眼袋，2-轻微，3-严重）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>眼袋图层图片</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;overallArea</td>
+            <td>object</td>
+            <td>面积</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left</td>
+            <td>number</td>
+            <td>左边面积值</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right</td>
+            <td>number</td>
+            <td>右边面积值</td>
+        </tr>
+        <tr>
+            <td>furrows</td>
+            <td>number</td>
+            <td>卧蚕（1-无卧蚕，2-有卧蚕）</td>
+        </tr>
+        <tr>
+            <td>wrinkles</td>
+            <td>list</td>
+            <td>细纹列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>面积值</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;wrinkleTypeId</td>
+            <td>number</td>
+            <td>细纹类型（1-抬头纹，2-法令纹，3-泪沟，4-笑肌断层, 5-鱼尾纹,6-眉间纹）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-无，2-轻度，3-中度，4-重度）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;left</td>
+            <td>number</td>
+            <td>左边面积值(只有法令纹和鱼尾纹有左右面积)</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;right</td>
+            <td>number</td>
+            <td>右边面积值(只有法令纹和鱼尾纹有左右面积)</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;overallArea</td>
+            <td>object</td>
+            <td>整体面积值</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left</td>
+            <td>number</td>
+            <td>左边面积值(只有法令纹和鱼尾纹有左右面积)</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right</td>
+            <td>number</td>
+            <td>右边面积值(只有法令纹和鱼尾纹有左右面积)</td>
+        </tr>
+        <tr>
+            <td>pigmentations</td>
+            <td>list</td>
+            <td>色素斑列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>面积值</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>面积占比</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;pigmentationTypeId</td>
+            <td>number</td>
+            <td>色素斑类型（1-黑痣，2-黄褐斑，3-雀斑，4-隐藏斑）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-无，2-轻度，3-中度，4-重度）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;facePart</td>
+            <td>number</td>
+            <td>部位（0-脸部无色素斑，1-额头，2-鼻子，3-左脸，4-右脸，5-下颌）</td>
+        </tr>
+        <tr>
+            <td>moisture</td>
+            <td>list</td>
+            <td>水分列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;className</td>
+            <td>number</td>
+            <td>缺水类型（1-滋润，2-敏感性缺水，3-油脂性缺水，4-老化性缺水）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-滋润，2-轻度缺水，3-重度缺水）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;facePart</td>
+            <td>number</td>
+            <td>部位（1-额头，2-鼻子，3-左脸，4-右脸，5-下颌）</td>
+        </tr>
+        <tr>
+            <td>sensitivity</td>
+            <td>object</td>
+            <td>敏感度</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityCategory</td>
+            <td>list</td>
+            <td>敏感度类型列表</td>
+        </tr><tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-无，2-轻度，3-中度, 4-重度）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facePart</td>
+            <td>number</td>
+            <td>部位（1-额头，2-鼻子，3-左脸，4-右脸，5-下颌）</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityMaskPath</td>
+            <td>String</td>
+            <td>敏感图层图片</td>
+        </tr>
+            <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;sensitivityOverall</td>
+            <td>object</td>
+            <td>敏感整脸的情况</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>敏感面积占比</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>敏感面积占比</td>
+        </tr>
+                <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>敏感严重程度（1：无 2：轻度 3：中度 4：重度）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;typeId</td>
+            <td>number</td>
+            <td>敏感类型（1-耐受，2-敏感）</td>
+        </tr>
+        <tr>
+            <td>skinType</td>
+            <td>number</td>
+            <td>肤质类型（1: 干性 2：中性偏干 3：中性 4：混合性偏干 5：混合性 6：混合性偏油 7：油性）</td>
+        </tr>
+        <tr>
+            <td>darkCircle</td>
+            <td>list</td>
+            <td>黑眼圈列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;type</td>
+            <td>number</td>
+            <td>缺水类型（1-无，2-血管型，3-色素型）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-无，2-轻微，3-严重）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;position</td>
+            <td>number</td>
+            <td>部位（1-左眼，2-右眼）</td>
+        </tr>
+        <tr>
+            <td>skinAge</td>
+            <td>number</td>
+            <td>肌肤年龄</td>
+        </tr>
+        <tr>
+            <td>oil</td>
+            <td>list</td>
+            <td>油分列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-无，2-轻微，3-严重）</td>
+        </tr>
+        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;facePart</td>
+            <td>number</td>
+            <td>部位（1-额头，2-鼻子，3-左脸，4-右脸，5-下颌）</td>
+        
+        </tr><tr>
+            <td>fatGranule</td>
+            <td>list</td>
+            <td>脂肪粒列表</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1-无，2-轻，3-重）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;number</td>
+            <td>number</td>
+            <td>脂肪粒数量</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;fatGranuleTypeId</td>
+            <td>number</td>
+            <td>脂肪粒类型（1-汗管瘤，2-栗丘疹）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;maskPath</td>
+            <td>String</td>
+            <td>脂肪粒图层图片</td>
+        </tr><tr>
+            <td>wrinkleLayer</td>
+            <td>string</td>
+            <td>细纹图层图片</td>
+        </tr>
+        <tr>
+            <td>crowfeetMaskPath</td>
+            <td>string</td>
+            <td>鱼尾纹图层图片</td>
+        </tr>
+        <tr>
+            <td>acneLayer</td>
+            <td>string</td>
+            <td>痘痘图层图片</td>
+        </tr>
+        <tr>
+            <td>pigmentationLayer</td>
+            <td>string</td>
+            <td>色斑图层图片</td>
+        </tr>
+        <tr>
+            <td>darkCircleMaskPath</td>
+            <td>string</td>
+            <td>黑眼圈图层图片</td>
+        </tr>
+        <tr>
+            <td>moistureMaskPath</td>
+            <td>string</td>
+            <td>水分图层图片</td>
+        </tr>
+        <tr>
+            <td>oilMaskPath</td>
+            <td>string</td>
+            <td>油分图层图片</td>
+        </tr>
+        <tr>
+            <td>sex</td>
+            <td>number</td>
+            <td>性别（1-男，2-女）</td>
+        </tr>
+        <tr>
+            <td>imageQuality</td>
+            <td>Object</td>
+            <td>图片质量</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;lightType</td>
+            <td>number</td>
+            <td>1-正常，2-过暗，3-曝光，4-偏光</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;blurType</td>
+            <td>number</td>
+            <td>0-模糊，1-正常</td>
+        </tr>
+        <tr>
+            <td>facePose</td>
+            <td>Object</td>
+            <td>人脸姿态估计</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;pitch</td>
+            <td>number</td>
+            <td>上下翻转的角度</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;roll</td>
+            <td>number</td>
+            <td>左右翻转的角度</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;yam</td>
+            <td>number</td>
+            <td>平面内旋转的角度</td>
+        </tr>
+        <tr>
+            <td>photographId</td>
+            <td>String</td>
+            <td>测肤记录ID</td>
+        </tr>
+        <tr>
+            <td>faceShelter</td>
+            <td>Object</td>
+            <td>遮挡物</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;exist</td>
+            <td>number</td>
+            <td>有无遮挡物（0-无遮挡物，1-有遮挡物）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;types</td>
+            <td>Object</td>
+            <td>遮挡物种类</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hat</td>
+            <td>number</td>
+            <td>帽子（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hair</td>
+            <td>number</td>
+            <td>刘海（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;glass</td>
+            <td>number</td>
+            <td>眼镜（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sticker</td>
+            <td>number</td>
+            <td>鼻贴（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mask</td>
+            <td>number</td>
+            <td>口罩（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;facial</td>
+            <td>number</td>
+            <td>面膜（0-没有，1-存在）</td>
+        </tr>
+        <tr>
+            <td>basemapPaths</td>
+            <td>Object</td>
+            <td>底图</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path1</td>
+            <td>String</td>
+            <td>底图1URL,颜色为#809ED1（痘痘、色斑、黑头、脂肪粒维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path2</td>
+            <td>String</td>
+            <td>底图2URL,颜色为#B6D0C9（水、油、细纹维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;path3</td>
+            <td>String</td>
+            <td>底图3URL,颜色为#FFEECF（黑眼圈、卧蚕、眼袋、毛孔维度可视化需要）</td>
+        </tr>
+        <tr>
+            <td>starResult</td>
+            <td>Object</td>
+            <td>相似明星脸</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;name</td>
+            <td>String</td>
+            <td>明星名称</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;similarity</td>
+            <td>number</td>
+            <td>相似度</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;starPath</td>
+            <td>String</td>
+            <td>明星图片</td>
+        </tr>
+        <tr>
+            <td>oilOverall</td>
+            <td>Object</td>
+            <td>油分整脸的情况</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>油分面积</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>油分面积占比，ratio对应等级 1：缺油, 2：正常, 3：过多： ratio= [0.0, 2.05, 100.0]</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1：不出油 2：轻度出油 3：重度出油）</td>
+        </tr>
+        <tr>
+            <td>moistureOverall</td>
+            <td>Object</td>
+            <td>水分整脸的情况</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;area</td>
+            <td>number</td>
+            <td>缺水面积</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;areaRatio</td>
+            <td>number</td>
+            <td>缺水面积占比</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;level</td>
+            <td>number</td>
+            <td>严重等级（1：滋润 2：轻度缺水 3：重度缺水））</td>
+        </tr>
+        <tr>
+            <td>orgimageFaceLocation</td>
+            <td>Array</td>
+            <td>原图人脸坐标[x1,y1,x2,y2,rows,cols],包括左上角和右下角,原图大小（高X宽）</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>示例</strong></p>
+
+
+
+<pre class="prettyprint hljs-dark"><code class="hljs json"><div class="hljs-line">{
+</div><div class="hljs-line">    <span class="hljs-attr">"code"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">    <span class="hljs-attr">"data"</span>: {
+</div><div class="hljs-line">        <span class="hljs-attr">"furrows"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"photographId"</span>: <span class="hljs-string">"5f87a804bcd3340012168a4b"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"starResult"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"similarity"</span>: <span class="hljs-number">91</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"李溪芮"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"starPath"</span>: <span class="hljs-string">"http://skintest.hetyj.com/218d5488b5102ecd7f758a5d50b9a169.jpg"</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"pore"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"maskPath"</span>: <span class="hljs-string">""</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"oilMaskPath"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"oilOverall"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"wrinkles"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">6</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"overallArea"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">5</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"overallArea"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">2671</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">3</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"wrinkleTypeId"</span>: <span class="hljs-number">4</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"pigmentationLayer"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"oil"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">5</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">4</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">3</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"skinType"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"darkCircle"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"type"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"position"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"type"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"position"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"eyeshape"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"eyelid"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"narrow"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"updown"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"facePose"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"pitch"</span>: <span class="hljs-string">"14.45"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"roll"</span>: <span class="hljs-string">"0.08"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"yam"</span>: <span class="hljs-string">"-1.59"</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"faceshape"</span>: <span class="hljs-string">"H"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"moistureMaskPath"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"fatGranule"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"fatGranuleTypeId"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"maskPath"</span>: <span class="hljs-string">""</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"blackHead"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"maskPath"</span>: <span class="hljs-string">""</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"imageQuality"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"lightType"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"blurType"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"acneLayer"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"eyebrow"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"left"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"right"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"darkCircleMaskPath"</span>: <span class="hljs-string">"http://skintest.hetyj.com/4f1cdd01320fca8d425595bfe90e1629.png"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"pouch"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"exist"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"maskPath"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"overallArea"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"left"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"right"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"sex"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"faceShelter"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"exist"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"types"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"hat"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"hair"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"glass"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"sticker"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"mask"</span>: <span class="hljs-literal">null</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facial"</span>: <span class="hljs-literal">null</span>
+</div><div class="hljs-line">            }
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"orgimageFaceLocation"</span>: [<span class="hljs-number">148</span>, <span class="hljs-number">301</span>, <span class="hljs-number">1895</span>, <span class="hljs-number">2714</span>, <span class="hljs-number">4032</span>, <span class="hljs-number">2145</span>],
+</div><div class="hljs-line">        <span class="hljs-attr">"wrinkleLayer"</span>: <span class="hljs-string">"http://skintest.hetyj.com/d047e9e8f84b25c45e415909f9db578a.png"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"moisture"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">5</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">4</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"className"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"pigmentations"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"pigmentationTypeId"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"pigmentationTypeId"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"pigmentationTypeId"</span>: <span class="hljs-number">4</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"pigmentationTypeId"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"basemapPaths"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"path1"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"path2"</span>: <span class="hljs-string">"http://skintest.hetyj.com/4491f27df51cac50a025f2cf00ddbba3.jpg"</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"path3"</span>: <span class="hljs-string">"http://skintest.hetyj.com/20c2ac632a629ee43384c57d17d430d9.jpg"</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"isface"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"facecolor"</span>: <span class="hljs-string">"E_5"</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"crowfeetMaskPath"</span>: <span class="hljs-string">""</span>,
+</div><div class="hljs-line">        <span class="hljs-attr">"sensitivity"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"sensitivityCategory"</span>: [{
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">2</span>
+</div><div class="hljs-line">            }, {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">5</span>
+</div><div class="hljs-line">            }, {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">1</span>
+</div><div class="hljs-line">            }, {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">4</span>
+</div><div class="hljs-line">            }, {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">3</span>
+</div><div class="hljs-line">            }],
+</div><div class="hljs-line">            <span class="hljs-attr">"typeId"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"sensitivityOverall"</span>: {
+</div><div class="hljs-line">                <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">                <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">            },
+</div><div class="hljs-line">            <span class="hljs-attr">"sensitivityMaskPath"</span>: <span class="hljs-string">""</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"moistureOverall"</span>: {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"area"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"areaRatio"</span>: <span class="hljs-number">0.0</span>
+</div><div class="hljs-line">        },
+</div><div class="hljs-line">        <span class="hljs-attr">"acnes"</span>: [{
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">3</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">2</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">6</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">4</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }, {
+</div><div class="hljs-line">            <span class="hljs-attr">"level"</span>: <span class="hljs-number">1</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"number"</span>: <span class="hljs-number">0</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"acneTypeId"</span>: <span class="hljs-number">5</span>,
+</div><div class="hljs-line">            <span class="hljs-attr">"facePart"</span>: <span class="hljs-number">0</span>
+</div><div class="hljs-line">        }],
+</div><div class="hljs-line">        <span class="hljs-attr">"skinAge"</span>: <span class="hljs-number">22</span>
+</div><div class="hljs-line">    }
+</div><div class="hljs-line">}
+</div><div class="hljs-line"><wbr>
+</div></code></pre>
+
+
+
+<h2 id="错误码">错误码</h2>
+
+<table width="100%" style="border-spacing: 0;  border-collapse: collapse;">
+    <tbody><tr>
+        <th width="18%">状态码</th>
+        <th>状态码说明</th>
+        <td>处理建议</td>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>请求成功</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>100010100</td>
+        <td>缺少授权信息</td>
+        <td>请检查accessToken，appId，timestamp授权信息是否缺失或错误</td>
+    </tr>
+    <tr>
+        <td>100010101</td>
+        <td>accessToken错误或已过期</td>
+        <td>重新获取accessToken</td>
+    </tr>
+    <tr>
+        <td>100010103</td>
+        <td>AppId不合法</td>
+        <td>请检查是否与申请的appId一致</td>
+    </tr>
+    <tr>
+        <td>100010104</td>
+        <td>timestamp过期</td>
+        <td>获取最新时间戳</td>
+    </tr>
+    <tr>
+        <td>100010105</td>
+        <td>签名错误</td>
+        <td>请检查是否符合签名规则</td>
+    </tr>
+    <tr>
+        <td>100010106</td>
+        <td>请求地址错误</td>
+        <td>请检查请求地址</td>
+    </tr>
+    <tr>
+        <td>100010107</td>
+        <td>请求Scheme错误</td>
+        <td>请检查请求scheme是否为https</td>
+    </tr>
+    <tr>
+        <td>100010200</td>
+        <td>失败</td>
+        <td>未知原因，请重试</td>
+    </tr>
+    <tr>
+        <td>100010201</td>
+        <td>缺少参数</td>
+        <td>检查是否缺失必传参数</td>
+    </tr>
+    <tr>
+        <td>107001011</td>
+        <td>分析失败</td>
+        <td>图片分析失败，请重试</td>
+    </tr>
+    <tr>
+        <td>107001013</td>
+        <td>图片中未检测到人脸</td>
+        <td>请重新拍照</td>
+    </tr>
+    <tr>
+        <td>107001014</td>
+        <td>有两张或多张人脸</td>
+        <td>请重新拍照</td>
+    </tr>
+    <tr>
+        <td>107001032</td>
+        <td>图片太大错误</td>
+        <td>请检查图片大小是否符合要求</td>
+    </tr>
+    <tr>
+        <td>107001033</td>
+        <td>图片格式错误</td>
+        <td>请检查图片格式是否符合要求</td>
+    </tr>
+    <tr>
+        <td>107001034</td>
+        <td>图片处理超时</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107001035</td>
+        <td>非法的图片路径</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107001036</td>
+        <td>解析图片发生错误</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107001037</td>
+        <td>图片像素未达到要求</td>
+        <td>请检查图片像素是否符合要求</td>
+    </tr>
+    <tr>
+        <td>107001038</td>
+        <td>维度值无效</td>
+        <td>请检查维度值是否符合文档要求</td>
+    </tr>
+    <tr>
+        <td>107003010</td>
+        <td>肤色检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003011</td>
+        <td>脸型检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003012</td>
+        <td>黑头检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003014</td>
+        <td>毛孔检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003016</td>
+        <td>痘痘检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003017</td>
+        <td>眼型检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003018</td>
+        <td>眉形检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003019</td>
+        <td>卧蚕或眼袋检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003020</td>
+        <td>细纹检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003021</td>
+        <td>色素斑检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003022</td>
+        <td>敏感度检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003023</td>
+        <td>油分检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003024</td>
+        <td>水分检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003025</td>
+        <td>肤质类型检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003028</td>
+        <td>脂肪粒检测失败</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003089</td>
+        <td>图片质量检测错误</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003090</td>
+        <td>人脸姿态检测错误</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107003091</td>
+        <td>算法服务请求超时</td>
+        <td>请重试</td>
+    </tr>
+    <tr>
+        <td>107004000</td>
+        <td>授权超时</td>
+        <td>授权已超过使用期限</td>
+    </tr>
+    <tr>
+        <td>107005000</td>
+        <td>数据解析失败</td>
+        <td>本地解析网络数据失败</td>
+    </tr>
+</tbody></table></div></body></html>

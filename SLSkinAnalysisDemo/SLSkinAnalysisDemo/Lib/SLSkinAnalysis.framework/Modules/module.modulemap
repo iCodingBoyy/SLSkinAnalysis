@@ -1,0 +1,6 @@
+framework module SLSkinAnalysis {
+  umbrella header "SLSkinAnalysis.h"
+
+  export *
+  module * { export * }
+}

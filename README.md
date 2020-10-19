@@ -1,11 +1,11 @@
 
 
 
-# SLSkinAnalysisQCloud V2.0.0 SDK iOS平台接入指南 
+# SLSkinAnalysis V2.0.0 SDK iOS平台接入指南 
 
 -----
 
-`SLSkinAnalysisQCloud` 是 `HETSkinAnalysisSDK` 的升级版本，改进架构并优化了拍照性能和体验，内部集成了 `人脸遮挡物检测功能`和`QCloud` 云服务`。
+`SLSkinAnalysis` 是 `HETSkinAnalysisSDK` 的升级版本，改进架构并优化了拍照性能和体验。
 
 ![版本](https://img.shields.io/badge/version-2.0.0-brightgreen.svg)      ![Platform](https://img.shields.io/badge/platform-iOS%209.0+-orange.svg)     ![Build Status](https://img.shields.io/badge/build-passing-red.svg)
 
@@ -56,7 +56,7 @@
             <td>2020年10月16日</td>
             <td>2.0.0</td>
             <td>马远征</td>
-            <td>1、新增油分整脸情况字段oilOverall；2、新增水分整脸情况字段moistureOverall；3、新增敏感整脸情况字段sensitivityOverall；4、新增对应原图的人脸区域坐标字段orgImageFaceLocation；5.添加人脸遮挡物检测功能。 </td>
+            <td>1.新增油分整脸情况字段oilOverall；2.新增水分整脸情况字段moistureOverall；3.新增敏感整脸情况字段sensitivityOverall；4.新增对应原图的人脸区域坐标字段orgImageFaceLocation。 </td>
         </tr>
     </tbody>
 </table>
@@ -71,20 +71,13 @@
 
 SDK支持 iOS 9.0 以上设备，请保持Xcode开发工具升级到最新版本。
 
-### 1、资源下载
-
->- [x] 肤质分析 SDK 下载  [SLSkinAnalysisQCloud.framework](https://github.com/iCodingBoyy/SLSkinAnalysis.git)
->- [x] Demo下载 [SLSkinAnalysisDemo](https://github.com/iCodingBoyy/SLSkinAnalysis.git)
-
-### 2、Xcode 集成
-
-1、将`SLSkinAnalysisQCloud.framework` 拖到你的项目中，将 `Embed` 设置为 `Embed & Sign`
+1、将 `SLSkinAnalysis.framework` 拖到你的项目中，将 `Embed` 设置为 `Embed & Sign`
 
 2、添加必要的链接库文件，并在 `Other Link Flags` 选项添加 `-ObjC`
  
  - libc++.tdb
 
-3、在需要使用的地方导入头文件 `#import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>` 即可进入相关开发
+3、在需要使用的地方导入头文件 `#import <SLSkinAnalysis/SLSkinAnalysis.h>` 即可进入相关开发
 
 
 ---
@@ -96,7 +89,7 @@ SDK支持 iOS 9.0 以上设备，请保持Xcode开发工具升级到最新版本
 
 ```objectivec
 // 优先导入头文件
-#import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>
+#import <SLSkinAnalysis/SLSkinAnalysis.h>
 
 // 注册
 SLSARegister(@"31298", @"145a2540f00147e89dc5e33b6842f74c");
@@ -327,10 +320,10 @@ config.minStableFramesToOutputState = 3; // 静音模式最小稳定帧，3此�
 #pragma mark - Delegate
 
 - (nullable SLSAVoiceItem*)getVoiceItemByVideoBufferAnalysisState:(SSVideoBufferAnalysisState)state frontCamera:(BOOL)isFrontCamera {
-    /// 实现自定义语音，当 state == SSVideoBufferAnalysisFaceShelter 时调用下面遮挡物检测语音接口
+    /// state == SSVideoBufferAnalysisStateFaceShelter 时不走此接口
 }
 
-/// 当SDK支持人脸遮挡物检测功能时此接口会被调用
+/// 当SDK支持人脸遮挡物检测时此接口有效
 - (nullable SLSAVoiceItem*)getVoiceItemByDetectedFaceShelters:(NSArray<SLSAFaceShelterItem*>*)shelters {
     /// 实现遮挡物状态语音
 }
@@ -345,25 +338,6 @@ config.minStableFramesToOutputState = 3; // 静音模式最小稳定帧，3此�
 SLSAVideoBufferAnalysisConfiguration *config = [[SLSAVideoBufferAnalysisConfiguration alloc]init];
 config.minDistance = 0.55;
 config.maxDistance = 0.95;
-SLSAMyCustomVoiceConfiguration *voiceConfig = [[SLSAMyCustomVoiceConfiguration alloc]init];
-_bufferAnalysisEngine = [[SLSAVideoBufferAnalysisEngine alloc]initWithConfiguation:config voiceConfig:voiceConfig];
-```
-
-- 遮挡物检测支持
-
-```objectivec
-
-SLSAVideoBufferAnalysisConfiguration *config = [[SLSAVideoBufferAnalysisConfiguration alloc]init];
-config.minDistance = 0.55;
-config.maxDistance = 0.95;
-// 判断是否支持遮挡物检测功能，
-if (_bufferAnalysisEngine.faceShelterSupported) {
-    // 如果支持遮挡物检测功能，设置`SLSAVideoBufferAnalysisConfiguration`支持遮挡物检测才会起作用
-    config.option = config.option | SSVideoBufferAnalysisFaceShelter;
-}
-else {
-    /// 设置支持遮挡物检测option将不起作用
-}
 SLSAMyCustomVoiceConfiguration *voiceConfig = [[SLSAMyCustomVoiceConfiguration alloc]init];
 _bufferAnalysisEngine = [[SLSAVideoBufferAnalysisEngine alloc]initWithConfiguation:config voiceConfig:voiceConfig];
 ```
@@ -409,7 +383,6 @@ UIImage *originImage = [[UIImage alloc]initWithData:imageData];
 /// 检测拍摄的静态图片的可用性
 SSStillImageAnalysisOptions options = SSStillImageAnalysisNone;
 options = (options | SSStillImageAnalysisFaceFeature);
-/// 支持遮挡物检测功能时此设置有效
 options = (options | SSStillImageAnalysisFaceShelters);
 options = (options | SSStillImageAnalysisAspectRedio);
 options = (options | SSStillImageAnalysisPixels);
@@ -418,7 +391,6 @@ options = (options | SSStillImageAnalysisPixels);
 
 SLSAStillImageAnalysisConfiguration *config = [[SLSAStillImageAnalysisConfiguration alloc]init];
 config.options = options;
-/// 设置你自己的合适阈值
 config.maxPixels = 5000000;
 config.maxImageWidth = 2000;
 config.maxImageHeight = 2500;
@@ -432,39 +404,21 @@ if (![engine isValidStillImage:originImage error:&stillImageError]) {
 /// 上传分析
 ```
 
-### 3.5 上传与分析
+### 3.5 肤质分析
 采集到符合要求的正面清晰人脸照片后可调用以下接口进行上传和分析
 ```objectivec
 [QMUITips showLoading:@"图片上传中" inView:self.view];
 _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
-[_dataEngine uploadImage:image progress:^(float progress) {
-    NSLog(@"--上传进度--%@",@(progress));
-} result:^(NSString * _Nonnull imageURL, NSError * _Nonnull error) {
+/// 肤质分析
+[self.dataEngine analysisWithImageURL:imageURL result:^(NSDictionary * _Nonnull responseJSON, NSError * _Nonnull error) {
     [QMUITips hideAllTips];
     if (error) {
+        NSLog(@"----error----%@",error);
         [QMUITips showError:error.localizedDescription];
         return;
     }
-    NSLog(@"---上传成功--%@",imageURL);
-    SLSkinAnalysisDecryptQCloudImageURL(imageURL, ^(NSString *decryptedURL, NSError *error) {
-        if (error) {
-            NSLog(@"--图片解密错误--%@",error);
-            return;
-        }
-        NSLog(@"--图片解密成功--%@",decryptedURL);
-    });
-
-    /// 肤质分析
-    [self.dataEngine analysisWithImageURL:imageURL result:^(NSDictionary * _Nonnull responseJSON, NSError * _Nonnull error) {
-        [QMUITips hideAllTips];
-        if (error) {
-            NSLog(@"----error----%@",error);
-            [QMUITips showError:error.localizedDescription];
-            return;
-        }
-        NSLog(@"----responseJSON----%@",responseJSON);
-        [QMUITips showSucceed:@"肤质信息分析成功"];
-    }];
+    NSLog(@"----responseJSON----%@",responseJSON);
+    [QMUITips showSucceed:@"肤质信息分析成功"];
 }];
 ```
 --- 
@@ -1678,7 +1632,6 @@ _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
         <td>本地解析网络数据失败</td>
     </tr>
 </table>
-
 
 
 
