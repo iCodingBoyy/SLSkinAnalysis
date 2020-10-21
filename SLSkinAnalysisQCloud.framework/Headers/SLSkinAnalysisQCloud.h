@@ -30,3 +30,13 @@ FOUNDATION_EXPORT const unsigned char SLSkinAnalysisQCloudVersionString[];
 #import <SLSkinAnalysisQCloud/SLSADefaultVoiceConfiguration.h>
 #import <SLSkinAnalysisQCloud/SLSAFaceDataAnalysisEngine.h>
 
+// 老版本
+#import <SLSkinAnalysisQCloud/HETSkinAnalysisCaptureDevice.h>
+#import <SLSkinAnalysisQCloud/HETSkinAnalysisVoice.h>
+#import <SLSkinAnalysisQCloud/HETSkinAnalysisConfiguration.h>
+#import <SLSkinAnalysisQCloud/HETSkinAnalysisDefine.h>
+#import <SLSkinAnalysisQCloud/HETSkinAnalysisDataEngine.h>
+#import <SLSkinAnalysisQCloud/HETSkinAnalysisFaceEngine.h>
+#import <SLSkinAnalysisQCloud/HETFaceAnalysisResult.h>
+#import <SLSkinAnalysisQCloud/HETSkinAnalysisResult.h>
+#import <SLSkinAnalysisQCloud/HETFaceEngineDelegate.h>
