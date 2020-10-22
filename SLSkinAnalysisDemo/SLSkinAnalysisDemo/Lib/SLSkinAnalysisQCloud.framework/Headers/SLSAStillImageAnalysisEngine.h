@@ -37,7 +37,7 @@ typedef NS_OPTIONS(NSInteger, SSStillImageAnalysisOptions) {
 - (instancetype)initWithConfiguration:(nullable SLSAStillImageAnalysisConfiguration*)configuration;
 
 /// 判断图像是否符合肤质分析要求
-/// @param image still image
+/// @param image still image    
 /// @param error 返回 NO，检查此错误
 - (BOOL)isValidStillImage:(nonnull UIImage*)image error:(NSError**)error;
 

@@ -17,15 +17,13 @@
 #import "SSFaceShelterView.h"
 #import "SSCloudAnalysisViewController.h"
 
-#ifdef __QCloud__
+#if defined(__QCloud__) || defined(__HETSkinAnalysis__)
     #import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>
 #else
     #import <SLSkinAnalysis/SLSkinAnalysis.h>
 #endif
 
 @interface SSCameraViewController () <SLSACameraBufferOutputDelegate>
-@property (nonatomic, strong) SLSACamera *camera;
-@property (nonatomic, strong) SLSAVideoBufferAnalysisEngine *bufferAnalysisEngine;
 @property (nonatomic, assign) CGRect renderRect;
 @property (nonatomic, strong) SSFaceRectDraw *faceRectDraw;
 @property (nonatomic, strong) LOTAnimationView *faceAlignAnimationView;
@@ -45,7 +43,16 @@
 @property (nonatomic, strong) SSStillImageValityCheckView *stillImageCheckView;
 @property (nonatomic, strong) MPVolumeView *volumeView;
 @property (nonatomic, strong) UIImageView *imageView;
+
+#if defined(__HETSkinAnalysis__)
+@property (nonatomic, strong) HETSkinAnalysisCaptureDevice *captureDevice;
+@property (nonatomic, strong) HETSkinAnalysisDataEngine *dataEngine;
+@property (nonatomic, strong) HETSkinAnalysisFaceEngine *faceEngine;
+#else
 @property (nonatomic, strong) SLSAFaceDataAnalysisEngine *dataEngine;
+@property (nonatomic, strong) SLSACamera *camera;
+@property (nonatomic, strong) SLSAVideoBufferAnalysisEngine *bufferAnalysisEngine;
+#endif
 
 - (void)showAlert:(NSString*)message doneHandler:(void(^)(void))handler;
 @end
@@ -56,10 +63,14 @@
 #pragma mark - dealloc
 
 - (void)dealloc {
+#if defined(__HETSkinAnalysis__)
+    
+#else
     if (_camera) {
         [_camera clear];
         _camera = nil;
     }
+#endif
     if (_faceAlignAnimationView) {
         [_faceAlignAnimationView stop];
         _faceAlignAnimationView = nil;
@@ -71,9 +82,15 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+#if defined(__HETSkinAnalysis__)
+    if (self.captureDevice && self.captureDevice.isCaptureDevicePrepared) {
+        self.captureDevice.captureVideoPreviewLayer.frame = self.view.bounds;
+    }
+#else
     if (self.camera && self.camera.prepared) {
         self.camera.videoPreviewLayer.frame = self.view.bounds;
     }
+#endif
     self.renderRect = self.view.bounds;
 }
 
@@ -83,20 +100,35 @@
     if (self.faceAlignAnimationView) {
         [self.faceAlignAnimationView play];
     }
+#if defined(__HETSkinAnalysis__)
+    if (self.captureDevice && self.captureDevice.isCaptureDevicePrepared) {
+        self.captureDevice.captureVideoPreviewLayer.frame = self.view.bounds;
+    }
+#else
     if (self.camera && self.camera.prepared) {
         self.camera.videoPreviewLayer.frame = self.view.bounds;
     }
+#endif
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+#if defined(__HETSkinAnalysis__)
+    [self.captureDevice stopRuning];
+#else
     [self.camera stopRunning];
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (![self.camera isRunning]) {
+#if defined(__HETSkinAnalysis__)
+    BOOL ret = [self.captureDevice isRunning];
+#else
+    BOOL ret = [self.camera isRunning];
+#endif
+    if (!ret) {
         _stillImageCheckView.hidden = YES;
         [_stillImageCheckView setChecking:NO];
     }
@@ -105,12 +137,23 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [UIApplication sharedApplication].idleTimerDisabled = YES;
+#if defined(__HETSkinAnalysis__)
+    BOOL isRunning = [self.captureDevice isRunning];
+    BOOL isFrontCamera = ([self.captureDevice getCaptureDevicePosition] != AVCaptureDevicePositionBack);
+#else
+    BOOL isRunning = [self.camera isRunning];
     BOOL isFrontCamera = [self.camera isCameraPositionBack];
+#endif
+    
     self.voiceTextLabel.text = isFrontCamera ? @"请平视前置摄像头" : @"请平视后置摄像头";
-    if(![self.camera isRunning]) {
+    if(!isRunning) {
         _stillImageCheckView.hidden = YES;
         [_stillImageCheckView setChecking:NO];
+#if defined(__HETSkinAnalysis__)
+        [self.captureDevice startRuning];
+#else
         [self.camera startRunning];
+#endif
         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(prepareToTakePhoto) object:nil];
         [self setFaceAlignAnimationHidden:NO];
     }
@@ -156,6 +199,38 @@
 
 
 - (void)prepareCamera {
+#if defined(__HETSkinAnalysis__)
+    _faceEngine = [[HETSkinAnalysisFaceEngine alloc]init];
+    NSError *error;
+    _captureDevice = [[HETSkinAnalysisCaptureDevice alloc]init];
+    BOOL ret = [_captureDevice prepareDeviceWithPosition:AVCaptureDevicePositionFront error:&error];
+    if (!ret) {
+        @weakify(self);
+        [self showAlert:@"相机初始化出错" doneHandler:^{
+            @strongify(self);
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        return;
+    }
+    @weakify(self);
+    [_captureDevice setCaptureSampleBufferOutputBlock:^(AVCaptureOutput *output, CMSampleBufferRef sampleBuffer, AVCaptureConnection *connection) {
+        @strongify(self);
+        [self.faceEngine processVideoFrameBuffer:sampleBuffer position:[self.captureDevice getCaptureDevicePosition] faceInfoCallback:^(HETFaceAnalysisResult *analysisResult) {
+            
+        } result:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(prepareToTakePhoto) object:nil];
+                [self performSelector:@selector(prepareToTakePhoto) withObject:nil afterDelay:3.0];
+            });
+        }];
+    }];
+    // 调整相机的frame
+    if (self.captureDevice && self.captureDevice.isCaptureDevicePrepared) {
+        self.captureDevice.captureVideoPreviewLayer.frame = self.view.bounds;
+    }
+    [self.view.layer insertSublayer:self.captureDevice.captureVideoPreviewLayer atIndex:0];
+    [self.captureDevice startRuning];
+#else
     NSError *error;
     _camera = [[SLSACamera alloc]init];
     _camera.delegate = self;
@@ -176,14 +251,24 @@
     [self.view.layer insertSublayer:_camera.videoPreviewLayer atIndex:0];
     [self refreshUIStatus];
     [_camera startRunning];
+#endif
 }
 
 - (void)refreshUIStatus{
+    
+#if defined(__HETSkinAnalysis__)
+    self.voiceButton.selected = [HETSkinAnalysisConfiguration isMuted];
+    if (self.voiceButton.selected) {
+        [HETSkinAnalysisConfiguration setMute:YES];
+    }
+    self.switchButton.selected = [self.captureDevice getCaptureDevicePosition] == AVCaptureDevicePositionBack;
+#else
     self.voiceButton.selected = SLSAVoiceIsMute();
     if (self.voiceButton.selected) {
         SLSAStopVoicePlay();
     }
     self.switchButton.selected = [self.camera isCameraPositionBack];
+#endif
 }
 
 #pragma mark - 隐藏动画
@@ -292,7 +377,6 @@
 
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer faceObjects:(NSArray *)faceObjects fromConnection:(AVCaptureConnection *)connection {
     
-    @autoreleasepool {
 //        CVPixelBufferRef pixelBuffer = (CVPixelBufferRef)CMSampleBufferGetImageBuffer(sampleBuffer);
 //        CVPixelBufferLockBaseAddress(pixelBuffer, 0);
 //        CFDictionaryRef attachments = CMCopyDictionaryOfAttachments(kCFAllocatorDefault, sampleBuffer, kCMAttachmentMode_ShouldPropagate);
@@ -340,6 +424,8 @@
 //    NSInteger YUVLightValue = [SLSAVideoBufferAnalysisUtils YUVLightFromSampleBuffer:sampleBuffer faceRect:faceRect];
 //    CVPixelBufferUnlockBaseAddress(pixelBuffer,0);
     
+#if defined(__HETSkinAnalysis__)
+#else
     @weakify(self);
     AVCaptureDevicePosition position = [self.camera getCameraPosition];
     [self.bufferAnalysisEngine analysisVideoBuffer:sampleBuffer position:position faces:faceObjects renderRect:self.renderRect boundingRect:self.renderRect targetFace:^(CGRect faceRect) {
@@ -353,20 +439,26 @@
         @strongify(self);
         [self handleBufferAnalysisResult:result];
     }];
-    }
+#endif
+    
 }
 
 - (void)setVoiceTextWithResult:(SLSAVideoBufferAnalysisResult*)result {
+#if defined(__HETSkinAnalysis__)
+#else
     AVCaptureDevicePosition position = [self.camera getCameraPosition];
     SLSAVoiceItem *voiceItem = [self.bufferAnalysisEngine getVoiceItemWithAnlysisResult:result position:position];
     self.voiceTextLabel.text = voiceItem.text;
     NSLog(@"---文本提示--【%@】…%@",@(result.shelters.count),voiceItem.text);
+#endif
 }
 
 - (void)handleBufferAnalysisResult:(SLSAVideoBufferAnalysisResult*)result {
     if (!result) {
         return;
     }
+#if defined(__HETSkinAnalysis__)
+#else
     [self setVoiceTextWithResult:result];
     
     if (result.state == SSVideoBufferAnalysisStateNoFace) {
@@ -472,9 +564,55 @@
             [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(prepareToTakePhoto) object:nil];
         });
     }
+#endif
 }
 
 - (void)prepareToTakePhoto {
+#if defined(__HETSkinAnalysis__)
+    if ([self.captureDevice isCapturingStillImage]) {
+        return;
+    }
+    @weakify(self);
+    [self.captureDevice captureStillImageAsynchronously:YES result:^(UIImage *image, NSError *error) {
+        if (error) {
+            NSLog(@"--拍照错误-error----%@",error);
+            return;
+        }
+        @strongify(self);
+        NSLog(@"---拍照成功--");
+        [self.captureDevice stopRuning];
+        
+        [QMUITips showLoading:@"图片上传中" inView:self.view];
+        if (self.dataEngine) {
+            [self.dataEngine stop];
+        }
+        self.dataEngine = [[HETSkinAnalysisDataEngine alloc]init];
+        [self.dataEngine uploadImage:image progress:^(float progress) {
+            NSLog(@"--上传进度--%@",@(progress));
+        } result:^(NSString *imageURL, NSError *error) {
+            [QMUITips hideAllTips];
+            if (error) {
+                [QMUITips showError:error.localizedDescription];
+                [self setFaceAlignAnimationHidden:NO];
+                [self.stillImageCheckView setHidden:YES];
+                [self.stillImageCheckView setChecking:NO];
+                [self.captureDevice startRuning];
+                return;
+            }
+            NSLog(@"---上传成功--%@",imageURL);
+            HETSkinAnalysisDecryptQCloudImageURL(imageURL, ^(NSString *decryptedURL, NSError *error) {
+                if (error) {
+                    NSLog(@"--图片解密错误--%@",error);
+                    return;
+                }
+                NSLog(@"--图片解密成功--%@",decryptedURL);
+            });
+            SSCloudAnalysisViewController *cloudAnalysis = [[SSCloudAnalysisViewController alloc]init];
+            cloudAnalysis.imageURL = imageURL;
+            [self.navigationController pushViewController:cloudAnalysis animated:YES];
+        }];
+    }];
+#else
     if ([self.camera isCapturingStillImage]) {
         return;
     }
@@ -525,10 +663,13 @@
         }
         [self uploadAndAnalysisImage:originImage];
     }];
+#endif
 }
 
 - (void)uploadAndAnalysisImage:(UIImage*)image {
-#ifdef __QCloud__
+#if defined(__HETSkinAnalysis__)
+    
+#elif defined(__QCloud__)
     [QMUITips showLoading:@"图片上传中" inView:self.view];
     _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
     [_dataEngine uploadImage:image progress:^(float progress) {
@@ -571,6 +712,12 @@
 }
 
 - (void)clickToSwitchCamera {
+#if defined(__HETSkinAnalysis__)
+    AVCaptureDevicePosition position = [self.captureDevice switchCamera];
+    BOOL isFrontCamera = [self.captureDevice getCaptureDevicePosition] != AVCaptureDevicePositionBack;
+    self.voiceTextLabel.text = isFrontCamera ? @"请平视前置摄像头" : @"请平视后置摄像头";
+    self.switchButton.selected = (position == AVCaptureDevicePositionBack);
+#else
     // 1、未授权，检查授权
     // 2、正在拍照取消切换摄像头
     if ([self.camera isCapturingStillImage]) {
@@ -591,16 +738,18 @@
         self.voiceTextLabel.text = isFrontCamera ? @"请平视前置摄像头" : @"请平视后置摄像头";
         self.switchButton.selected = (position == AVCaptureDevicePositionBack);
     }];
+#endif
 }
 
 - (void)clickToChangeMute {
-    
+#if defined(__HETSkinAnalysis__)
+    [HETSkinAnalysisConfiguration setMute:!self.voiceButton.selected];
+    self.voiceButton.selected = [HETSkinAnalysisConfiguration isMuted];
     if (self.voiceButton.selected) {
-        SLSASetVoiceMute(NO);
+        [QMUITips showWithText:@"跟随语音提示，拍照效率更高哦"];
     }
-    else {
-        SLSASetVoiceMute(YES);
-    }
+#else
+    SLSASetVoiceMute(!self.voiceButton.selected);
     self.voiceButton.selected = SLSAVoiceIsMute();
     if (self.voiceButton.selected) {
         [QMUITips showWithText:@"跟随语音提示，拍照效率更高哦"];
@@ -608,6 +757,7 @@
     else {
 //        [self changeVoiceVolume];
     }
+#endif
 }
 
 
@@ -851,7 +1001,9 @@
 }
 
 #pragma mark - Getter
-
+#if defined(__HETSkinAnalysis__)
+    
+#else
 - (SLSAVideoBufferAnalysisEngine*)bufferAnalysisEngine {
     if (_bufferAnalysisEngine) {
         return _bufferAnalysisEngine;
@@ -862,6 +1014,7 @@
     _bufferAnalysisEngine = [[SLSAVideoBufferAnalysisEngine alloc]initWithConfiguation:config];
     return _bufferAnalysisEngine;
 }
+#endif
 
 - (LOTAnimationView*)faceAlignAnimationView
 {

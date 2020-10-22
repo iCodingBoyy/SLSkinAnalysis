@@ -4,6 +4,50 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Headers/HETDefaultFaceEngine.h</key>
+		<data>
+		zhfHmbBkLFP9bSZDvIjdKg3RvxA=
+		</data>
+		<key>Headers/HETDefaultFaceInfo.h</key>
+		<data>
+		GDxAuuFbnK5J1QUBS92dlHWnn5I=
+		</data>
+		<key>Headers/HETFaceAnalysisResult.h</key>
+		<data>
+		CE6GX1HpWGDf64hRVDQ68qGKs3w=
+		</data>
+		<key>Headers/HETFaceEngineDelegate.h</key>
+		<data>
+		3MeBKewn9hQJuogMim5HMfYHiiY=
+		</data>
+		<key>Headers/HETSkinAnalysisCaptureDevice.h</key>
+		<data>
+		Jm/5hVUa2UfSWO4ri7dwIpmZKfk=
+		</data>
+		<key>Headers/HETSkinAnalysisConfiguration.h</key>
+		<data>
+		phHMY7FQewGIM34iuFVArhI5fbk=
+		</data>
+		<key>Headers/HETSkinAnalysisDataEngine.h</key>
+		<data>
+		/8Vy64CU52NIvO8JzjmR+fDC5qs=
+		</data>
+		<key>Headers/HETSkinAnalysisDefine.h</key>
+		<data>
+		8ONlhHPlwUvHKhsA1lFeWkQZ7us=
+		</data>
+		<key>Headers/HETSkinAnalysisFaceEngine.h</key>
+		<data>
+		Ug+PUh+Im2HaVM3pNmUq2sDZrS8=
+		</data>
+		<key>Headers/HETSkinAnalysisResult.h</key>
+		<data>
+		+JHPxhjla9CLTpqMlbpCrq0IQxo=
+		</data>
+		<key>Headers/HETSkinAnalysisVoice.h</key>
+		<data>
+		0ep8KsElN4gH0Ht1UG6/pPXRTZk=
+		</data>
 		<key>Headers/SLSACamera.h</key>
 		<data>
 		xirOqkl1plu8FO6FJfudNSB84Oc=
@@ -38,7 +82,7 @@
 		</data>
 		<key>Headers/SLSAStillImageAnalysisEngine.h</key>
 		<data>
-		m9TPeNcLTOUOyLeqLrJ5RKGqIA8=
+		x/LIKNZ67Y5Bbw4kGXyyYQEF0eQ=
 		</data>
 		<key>Headers/SLSAVideoBufferAnalysisConfiguration.h</key>
 		<data>
@@ -46,7 +90,7 @@
 		</data>
 		<key>Headers/SLSAVideoBufferAnalysisEngine.h</key>
 		<data>
-		a/M86jX/lpm6i8phlmPgu8k1krs=
+		jQIw0wb0qLwe5UzaOJJ6bRnbxB8=
 		</data>
 		<key>Headers/SLSAVideoBufferAnalysisResult.h</key>
 		<data>
@@ -58,7 +102,7 @@
 		</data>
 		<key>Headers/SLSkinAnalysisQCloud.h</key>
 		<data>
-		QMfiKOr8o5jHkCtwp6XUw0OjPiM=
+		gK4rOPpAGkYcFtTNXR8Moti/DBI=
 		</data>
 		<key>Headers/UIImage+SLSA.h</key>
 		<data>
@@ -163,6 +207,127 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Headers/HETDefaultFaceEngine.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			zhfHmbBkLFP9bSZDvIjdKg3RvxA=
+			</data>
+			<key>hash2</key>
+			<data>
+			chtUpqMDhovx2UoRwspsmG0x569WMg3GXeM8nRXTPC4=
+			</data>
+		</dict>
+		<key>Headers/HETDefaultFaceInfo.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GDxAuuFbnK5J1QUBS92dlHWnn5I=
+			</data>
+			<key>hash2</key>
+			<data>
+			H30/fQwykSamXR+tYmNC0mQNasgcMrCkEIeryrXusMU=
+			</data>
+		</dict>
+		<key>Headers/HETFaceAnalysisResult.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			CE6GX1HpWGDf64hRVDQ68qGKs3w=
+			</data>
+			<key>hash2</key>
+			<data>
+			sMxSR2tDbRTYkm75TFFY7uZLb6AbcMdzF8dvbjFPEjw=
+			</data>
+		</dict>
+		<key>Headers/HETFaceEngineDelegate.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3MeBKewn9hQJuogMim5HMfYHiiY=
+			</data>
+			<key>hash2</key>
+			<data>
+			dy5OHPtbeRvC0MgGzVXYWFxM4Q4QqN+tPpQCz4UfUCo=
+			</data>
+		</dict>
+		<key>Headers/HETSkinAnalysisCaptureDevice.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Jm/5hVUa2UfSWO4ri7dwIpmZKfk=
+			</data>
+			<key>hash2</key>
+			<data>
+			hXo5ntU/BGQVeatAPNEudNr9d8EUehMi1D0NWLDToPA=
+			</data>
+		</dict>
+		<key>Headers/HETSkinAnalysisConfiguration.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			phHMY7FQewGIM34iuFVArhI5fbk=
+			</data>
+			<key>hash2</key>
+			<data>
+			pZHJ/sR3icacmsh7P4iZ2tiVEQpfWgGkYu3rAmc1WmE=
+			</data>
+		</dict>
+		<key>Headers/HETSkinAnalysisDataEngine.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/8Vy64CU52NIvO8JzjmR+fDC5qs=
+			</data>
+			<key>hash2</key>
+			<data>
+			xri8viYQ6z80oYFTxfocKNRYBaDpP+ZqvshpnrFxphU=
+			</data>
+		</dict>
+		<key>Headers/HETSkinAnalysisDefine.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8ONlhHPlwUvHKhsA1lFeWkQZ7us=
+			</data>
+			<key>hash2</key>
+			<data>
+			iPRvCODj5dZ3IjXYwMwT2xuZoqkfhD7k19sBkvwPIhk=
+			</data>
+		</dict>
+		<key>Headers/HETSkinAnalysisFaceEngine.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Ug+PUh+Im2HaVM3pNmUq2sDZrS8=
+			</data>
+			<key>hash2</key>
+			<data>
+			mgNXph3N9mKCoMjTQrxlARMM9ToL8BOYus+PPHZxVXY=
+			</data>
+		</dict>
+		<key>Headers/HETSkinAnalysisResult.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			+JHPxhjla9CLTpqMlbpCrq0IQxo=
+			</data>
+			<key>hash2</key>
+			<data>
+			PVq6oe1rWD8O4FJ3tdcjVTj2r2mwdyVhSm+0uGTxBBs=
+			</data>
+		</dict>
+		<key>Headers/HETSkinAnalysisVoice.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			0ep8KsElN4gH0Ht1UG6/pPXRTZk=
+			</data>
+			<key>hash2</key>
+			<data>
+			OMHEUcNi/MZjbe5VEG/EbQoeucXvag+vKabPyRctnu8=
+			</data>
+		</dict>
 		<key>Headers/SLSACamera.h</key>
 		<dict>
 			<key>hash</key>
@@ -255,11 +420,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			m9TPeNcLTOUOyLeqLrJ5RKGqIA8=
+			x/LIKNZ67Y5Bbw4kGXyyYQEF0eQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ent6sRnXC3oN8mWGmXDyv8E9OKNYiNPK6juoFvyNMdM=
+			n8pmWQeydNzFGCFSIdMiaFeXVrJhj417zpi+pwOgq1c=
 			</data>
 		</dict>
 		<key>Headers/SLSAVideoBufferAnalysisConfiguration.h</key>
@@ -277,11 +442,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			a/M86jX/lpm6i8phlmPgu8k1krs=
+			jQIw0wb0qLwe5UzaOJJ6bRnbxB8=
 			</data>
 			<key>hash2</key>
 			<data>
-			aKh3pFr/IBflseSCbkBaptFs8TAdDdYNntDMWoMWFqs=
+			otUczEayguo+ugWI8w9RgASQUjTvlzPeNptU1p6ckLk=
 			</data>
 		</dict>
 		<key>Headers/SLSAVideoBufferAnalysisResult.h</key>
@@ -310,11 +475,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			QMfiKOr8o5jHkCtwp6XUw0OjPiM=
+			gK4rOPpAGkYcFtTNXR8Moti/DBI=
 			</data>
 			<key>hash2</key>
 			<data>
-			z1+oLC0HP4KgS/cgZmvw8lBbZiwpjLJjCrTKC2zE2jg=
+			CITwhBeG+Qh8r0dgcou8CR4ExS82ls13VN/R01EYcHk=
 			</data>
 		</dict>
 		<key>Headers/UIImage+SLSA.h</key>

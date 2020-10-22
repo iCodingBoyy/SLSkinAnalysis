@@ -10,7 +10,7 @@
 #import "SSNavigationController.h"
 #import "UIImage+SSFixed.h"
 #import "SSCloudAnalysisViewController.h"
-#ifdef __QCloud__
+#if defined(__QCloud__) || defined(__HETSkinAnalysis__)
     #import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>
 #else
     #import <SLSkinAnalysis/SLSkinAnalysis.h>
@@ -20,7 +20,11 @@
 @interface SSStillImageViewController ()<QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,
 QMUIImagePickerPreviewViewControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (nonatomic, strong) UIImageView *imageView;
+#if defined(__HETSkinAnalysis__)
+@property (nonatomic, strong) HETSkinAnalysisDataEngine *dataEngine;
+#else
 @property (nonatomic, strong) SLSAFaceDataAnalysisEngine *dataEngine;
+#endif
 @property (nonatomic, strong) UITextView *textView;
 @end
 
@@ -38,7 +42,12 @@ QMUIImagePickerPreviewViewControllerDelegate,UINavigationControllerDelegate,UIIm
 
 - (void)analysisStillImage {
 //    SStillImageAnalysisOptions options = SSStillImageAnalysisAll;
-    
+#if defined(__HETSkinAnalysis__)
+    HETSkinAnalysisFaceEngine *faceEngine = [[HETSkinAnalysisFaceEngine alloc]init];
+    [faceEngine processFaceImage:self.imageView.image result:^(HETFaceAnalysisResult *analysisResult) {
+        self.textView.text = analysisResult.printString;;
+    }];
+#else
     // 静态图片可用性分析主要用于对图片进行筛选，提高服务器分析成功率，如果没有特殊需要可以不进行处理
     SSStillImageAnalysisOptions options = SSStillImageAnalysisFaceFeature;
     options = (options | SSStillImageAnalysisSize);
@@ -81,6 +90,7 @@ QMUIImagePickerPreviewViewControllerDelegate,UINavigationControllerDelegate,UIIm
         [display appendFormat:@"---没有检测到遮挡物----\n"];
     }
     self.textView.text = display;
+#endif
 }
 
 #pragma mark - constraints
@@ -127,7 +137,31 @@ QMUIImagePickerPreviewViewControllerDelegate,UINavigationControllerDelegate,UIIm
 
 - (void)clickToUploadImage {
     
-#ifdef __QCloud__
+#if defined(__HETSkinAnalysis__)
+    [QMUITips showLoading:@"图片上传中" inView:self.view];
+    _dataEngine = [[HETSkinAnalysisDataEngine alloc]init];
+    [_dataEngine uploadImage:self.imageView.image progress:^(float progress) {
+        NSLog(@"--上传进度--%@",@(progress));
+    } result:^(NSString *imageURL, NSError *error) {
+        [QMUITips hideAllTips];
+        if (error) {
+            NSLog(@"---上传失败--%@",error);
+            [QMUITips showError:error.localizedDescription];
+            return;
+        }
+        NSLog(@"---上传成功--%@",imageURL);
+        HETSkinAnalysisDecryptQCloudImageURL(imageURL, ^(NSString *decryptedURL, NSError *error) {
+            if (error) {
+                NSLog(@"--图片解密错误--%@",error);
+                return;
+            }
+            NSLog(@"--图片解密成功--%@",decryptedURL);
+        });
+        SSCloudAnalysisViewController *cloudAnalysis = [[SSCloudAnalysisViewController alloc]init];
+        cloudAnalysis.imageURL = imageURL;
+        [self.navigationController pushViewController:cloudAnalysis animated:YES];
+    }];
+#elif defined(__QCloud__)
     [QMUITips showLoading:@"图片上传中" inView:self.view];
     _dataEngine = [[SLSAFaceDataAnalysisEngine alloc]init];
     [_dataEngine uploadImage:self.imageView.image progress:^(float progress) {

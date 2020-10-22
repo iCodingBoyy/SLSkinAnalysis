@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6B1D121D25207D4000AA372A /* SSFaceRectDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B1D121C25207D4000AA372A /* SSFaceRectDraw.m */; };
-		6B2A47D325398A0E00F65ADE /* SLSkinAnalysisQCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2A47D025398A0600F65ADE /* SLSkinAnalysisQCloud.framework */; };
-		6B2A47D425398A0E00F65ADE /* SLSkinAnalysisQCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2A47D025398A0600F65ADE /* SLSkinAnalysisQCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6B59D65B254127F2000C44A9 /* SLSkinAnalysisQCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B59D659254127EE000C44A9 /* SLSkinAnalysisQCloud.framework */; };
+		6B59D65C254127F2000C44A9 /* SLSkinAnalysisQCloud.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B59D659254127EE000C44A9 /* SLSkinAnalysisQCloud.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6BB6279A251358C700EF36CC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BB62799251358C700EF36CC /* AppDelegate.m */; };
 		6BB627A3251358C700EF36CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BB627A1251358C700EF36CC /* Main.storyboard */; };
 		6BB627A5251358C800EF36CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BB627A4251358C800EF36CC /* Assets.xcassets */; };
@@ -38,7 +38,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6B2A47D425398A0E00F65ADE /* SLSkinAnalysisQCloud.framework in Embed Frameworks */,
+				6B59D65C254127F2000C44A9 /* SLSkinAnalysisQCloud.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,7 +50,7 @@
 		6B1D12172520614C00AA372A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		6B1D121B25207D4000AA372A /* SSFaceRectDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSFaceRectDraw.h; sourceTree = "<group>"; };
 		6B1D121C25207D4000AA372A /* SSFaceRectDraw.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSFaceRectDraw.m; sourceTree = "<group>"; };
-		6B2A47D025398A0600F65ADE /* SLSkinAnalysisQCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SLSkinAnalysisQCloud.framework; sourceTree = "<group>"; };
+		6B59D659254127EE000C44A9 /* SLSkinAnalysisQCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SLSkinAnalysisQCloud.framework; sourceTree = "<group>"; };
 		6BB62795251358C700EF36CC /* SLSkinAnalysisDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLSkinAnalysisDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BB62798251358C700EF36CC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6BB62799251358C700EF36CC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B2A47D325398A0E00F65ADE /* SLSkinAnalysisQCloud.framework in Frameworks */,
+				6B59D65B254127F2000C44A9 /* SLSkinAnalysisQCloud.framework in Frameworks */,
 				9C78C72541E6177517CBE7E6 /* libPods-SLSkinAnalysisDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,7 +103,7 @@
 		6B1D120D252060F500AA372A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				6B2A47D025398A0600F65ADE /* SLSkinAnalysisQCloud.framework */,
+				6B59D659254127EE000C44A9 /* SLSkinAnalysisQCloud.framework */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -541,7 +541,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = WU2WFZ2B66;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -551,7 +551,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					__QCloud__,
+					__HETSkinAnalysis__,
 				);
 				INFOPLIST_FILE = SLSkinAnalysisDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -615,7 +615,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = WU2WFZ2B66;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -625,7 +625,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					__QCloud__,
+					__HETSkinAnalysis__,
 				);
 				INFOPLIST_FILE = SLSkinAnalysisDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

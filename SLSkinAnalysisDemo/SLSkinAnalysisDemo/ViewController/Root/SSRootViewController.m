@@ -12,7 +12,7 @@
 #import "SSURLInputViewController.h"
 #import "SSStillImageViewController.h"
 #import "SSCameraViewController.h"
-#ifdef __QCloud__
+#if defined(__QCloud__) || defined(__HETSkinAnalysis__)
     #import <SLSkinAnalysisQCloud/SLSkinAnalysisQCloud.h>
 #else
     #import <SLSkinAnalysis/SLSkinAnalysis.h>
@@ -31,16 +31,29 @@
     [super viewDidLoad];
     self.titleView.title = @"拍照测肤";
     [self makeConstraints];
-#ifndef __QCloud__
+    
+#if defined(__HETSkinAnalysis__)
+    // 老版本的拍照测肤SDK默认配置
+    HETSkinAnalysisConfiguration *config = [HETSkinAnalysisConfiguration defaultConfiguration];
+    [config registerWithAppId:@"31298" andSecret:@"145a2540f00147e89dc5e33b6842f74c"];
+    [config setYuvLightDetectionEnable:YES];
+    [config setDistanceDetectionEnable:YES];
+    [config setMaxDetectionDistance:0.85f];
+    [config setMinDetectionDistance:0.45f];
+    [config setMinYUVLight:60];
+    [config setMaxYUVLight:220];
+    [config setFaceBoundsDetectionEnable:YES];
+    [config setStandardFaceCheckEnable:YES];
+    [config setYuvLightDetectionEnable:YES];
+    [config setDistanceDetectionEnable:YES];
+    [config setCameraBounds:[UIScreen mainScreen].bounds];
+#elif defined(__QCloud__)
+    //     com.het.skinAnalysis
+    SLSARegister(@"31298", @"145a2540f00147e89dc5e33b6842f74c");
+#else
     // com.meilianhui.beauty
     SLSARegister(@"31486", @"3438376d97a1486998304170f391a07a");
-#else
-//     com.het.skinAnalysis
-    SLSARegister(@"31298", @"145a2540f00147e89dc5e33b6842f74c");
-    // com.sl.skinAnalysis
-//    SLSARegister(@"31889", @"777ce1a7d83f401fba05fda06f5d84dc");
 #endif
-    
 }
 
 - (void)makeConstraints {

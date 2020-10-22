@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 判断是否支持遮挡物检测，如果导入了遮挡物检测库才可以支持遮挡物检测
 @property(nonatomic, readonly, getter=isFaceShelterSupported) BOOL faceShelterSupported;
 
+
 #pragma mark - init
 
 /// 初始化buffer分析引擎
