@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger, HETImageAnalysisStep)
 
 @interface HETSkinAnalysisDataEngine : NSObject
 
+- (void)stop;
+
 /// 上传包含高清人脸的图像
 /// @param image 高清人脸图像
 /// @param progressBlock 上传进度回调block

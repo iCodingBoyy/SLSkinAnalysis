@@ -125,7 +125,7 @@ typedef NSString* (^HETModelToJSONBlock)(Class aClass, id aModel);
 
 /**
  设置拍照测肤语音播报静音
-
+ @warning 静音标识只做了内存缓存
  @param muted YES/NO
  @return YES/NO
  */
@@ -134,7 +134,7 @@ typedef NSString* (^HETModelToJSONBlock)(Class aClass, id aModel);
 
 /**
  判断拍照测肤是否静音
-
+ @warning 静音标识只做了内存缓存
  @return YES/NO
  */
 + (BOOL)isMuted;
@@ -187,7 +187,7 @@ typedef NSString* (^HETModelToJSONBlock)(Class aClass, id aModel);
  @param voiceConfig 自定义语音，如果传入nil则使用默认voice
  */
 - (void)setCustomVoice:(id<HETSkinAnalysisVoiceDelegate>)voiceConfig;
-
+- (id<HETSkinAnalysisVoiceDelegate>)getVoiceConfig;
 
 #pragma mark - Config
 

@@ -4,10 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>.DS_Store</key>
-		<data>
-		cT5TaSdpzdb/S8jG1UMzheWXU6s=
-		</data>
 		<key>Headers/HETDefaultFaceEngine.h</key>
 		<data>
 		zhfHmbBkLFP9bSZDvIjdKg3RvxA=
@@ -30,11 +26,11 @@
 		</data>
 		<key>Headers/HETSkinAnalysisConfiguration.h</key>
 		<data>
-		bkODWc1PjbznPWGCc3+GkOTytOk=
+		phHMY7FQewGIM34iuFVArhI5fbk=
 		</data>
 		<key>Headers/HETSkinAnalysisDataEngine.h</key>
 		<data>
-		/fm1zeP7f2YXSCXYdjVLrwboiXw=
+		/8Vy64CU52NIvO8JzjmR+fDC5qs=
 		</data>
 		<key>Headers/HETSkinAnalysisDefine.h</key>
 		<data>
@@ -270,22 +266,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bkODWc1PjbznPWGCc3+GkOTytOk=
+			phHMY7FQewGIM34iuFVArhI5fbk=
 			</data>
 			<key>hash2</key>
 			<data>
-			r//oLv5ZiXHRDwqrwL6Ld0cibAS0uT+2s2jMh1Z5LiM=
+			pZHJ/sR3icacmsh7P4iZ2tiVEQpfWgGkYu3rAmc1WmE=
 			</data>
 		</dict>
 		<key>Headers/HETSkinAnalysisDataEngine.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/fm1zeP7f2YXSCXYdjVLrwboiXw=
+			/8Vy64CU52NIvO8JzjmR+fDC5qs=
 			</data>
 			<key>hash2</key>
 			<data>
-			XAqO5q+FONqZd+9fc72/IUvzz6ADgKA64A1cbRgTKxI=
+			xri8viYQ6z80oYFTxfocKNRYBaDpP+ZqvshpnrFxphU=
 			</data>
 		</dict>
 		<key>Headers/HETSkinAnalysisDefine.h</key>
