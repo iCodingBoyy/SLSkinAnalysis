@@ -38,7 +38,7 @@ typedef id (^HETJSONToModelBlock)(Class aClass, id obj);
 typedef NSString* (^HETModelToJSONBlock)(Class aClass, id aModel);
 
 
-@interface HETSkinAnalysisConfiguration : NSObject <NSCopying>
+@interface HETSkinAnalysisConfiguration : NSObject
 @property (nonatomic, copy) HETJSONToModelBlock jsonToModelBlock;
 @property (nonatomic, copy) HETModelToJSONBlock modelToJSONBlock;
 
@@ -198,12 +198,5 @@ typedef NSString* (^HETModelToJSONBlock)(Class aClass, id aModel);
  */
 + (instancetype)defaultConfiguration;
 
-
-/**
- 设置一个默认拍照测肤配置对象，后续的所有操作都会使用此配置
- 
- @param configuration 新的默认配置对象
- */
-+ (void)setDefaultConfiguration:(HETSkinAnalysisConfiguration *)configuration;
 @end
 
