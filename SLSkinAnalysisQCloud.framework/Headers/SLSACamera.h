@@ -36,27 +36,24 @@ typedef NS_ENUM(NSInteger, SSCameraErrorCode) {
 /// @param error 返回 NO,查看此错误信息
 - (BOOL)prepareCamera:(AVCaptureDevicePosition)position error:(NSError**)error;
 
+/// 清理相机资源
 - (void)clear;
+
 
 #pragma mark - run
 
 /// 判断相机是否正在运行
 - (BOOL)isRunning;
 
-
 /// 异步运行相机拍摄，防止卡顿
 - (void)startRunning;
-
 
 /// 启动相机拍摄
 /// @param isAsync YES 异步启动 NO 同步启动
 - (void)startRunning:(BOOL)isAsync;
 
-
 /// 异步停止相机拍摄
 - (void)stopRunning;
-
-
 
 
 #pragma mark - position
@@ -64,10 +61,8 @@ typedef NS_ENUM(NSInteger, SSCameraErrorCode) {
 /// 判断是否正在使用后置摄像头
 - (BOOL)isCameraPositionBack;
 
-
 /// 获取调用相机摄像头位置
 - (AVCaptureDevicePosition)getCameraPosition;
-
 
 /// 切换摄像头
 /// @param position 摄像头位置
@@ -77,6 +72,8 @@ typedef NS_ENUM(NSInteger, SSCameraErrorCode) {
 
 #pragma mark - preset
 
+/// 设置相机分辨率
+/// @param sessionPreset AVCaptureSessionPreset
 - (BOOL)setSessionPreset:(AVCaptureSessionPreset)sessionPreset;
 
 

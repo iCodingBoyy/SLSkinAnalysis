@@ -26,6 +26,8 @@ FOUNDATION_EXPORT BOOL SLSAVoiceIsMute(void);
 /// 停止语音播放
 FOUNDATION_EXPORT void SLSAStopVoicePlay(void);
 
+
+
 #pragma mark - SLSAVoiceConfigDelegate
 
 @protocol SLSAVoiceConfigDelegate <NSObject>
@@ -38,6 +40,7 @@ FOUNDATION_EXPORT void SLSAStopVoicePlay(void);
 
 
 /// 根据遮挡物检测结果查询对应的状态语音
+/// @warning 支持遮挡物检测的版本需要设置，不知道遮挡物检测的版本可以直接返回nil
 /// @param shelters 遮挡物检测结果
 - (nullable SLSAVoiceItem*)getVoiceItemByDetectedFaceShelters:(NSArray<SLSAFaceShelterItem*>*)shelters;
 @end
